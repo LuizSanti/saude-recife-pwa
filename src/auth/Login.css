@@ -1,0 +1,42 @@
+.login {
+  padding: 60px 27px 40px;
+}
+
+.login-saudacao {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--verde);
+}
+
+.login-titulo {
+  margin-top: 40px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.login-subtitulo {
+  margin: 20px 0 40px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cinza-texto);
+}
+
+.login-erro {
+  margin-bottom: 16px;
+  font-size: 18px;
+  text-align: center;
+  color: var(--erro);
+}
+
+.login-rodape {
+  margin-top: 32px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--cinza-texto);
+}
+
+.login-rodape a {
+  font-weight: 700;
+  color: var(--verde-escuro);
+}
