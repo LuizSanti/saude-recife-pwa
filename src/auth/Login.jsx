@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Campo from '../components/Campo'
 import { useAuth } from '../hooks/useAuth'
 import './Login.css'
@@ -7,6 +7,7 @@ import './Login.css'
 function Login() {
   const { entrar } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
@@ -46,6 +47,12 @@ function Login() {
       <h1 className="login-saudacao">Bem vindo(a)</h1>
       <h2 className="login-titulo">Entrar</h2>
       <p className="login-subtitulo">Digite seu email e sua senha para entrar</p>
+
+      {location.state?.cadastrado && (
+        <p className="login-sucesso" role="status">
+          Conta criada! Entre com seu e-mail e senha.
+        </p>
+      )}
 
       <form onSubmit={aoEnviar} noValidate>
         <Campo

@@ -40,3 +40,12 @@
   font-weight: 700;
   color: var(--verde-escuro);
 }
+
+.login-sucesso {
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  font-weight: 600;
+  color: var(--verde-escuro);
+  background: var(--verde-claro);
+  border-radius: 10px;
+}
