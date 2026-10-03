@@ -1,0 +1,147 @@
+
+:root {
+  --splashGreen: #00854f;
+  --splashGreenDark: #005c37;
+  --splashWhite: #ffffff;
+  --splashFocus: #ffe066;
+}
+
+/* fundo verde */
+.splashScreen {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* respeita notch e barras do sistema (precisa de viewport-fit=cover) */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  background: var(--splashGreen);
+  color: var(--splashWhite);
+  font-family: 'Open Sans', 'Noto Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Círculos decorativos do Figma */
+.splashScreen::before,
+.splashScreen::after {
+  content: '';
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+opacity: 0.1;
+  pointer-events: none;
+}
+
+.splashScreen::before {
+  width: 92vw;
+  top: -6%;
+  left: -26vw;
+  top: calc(36% - 425px);
+  left: calc(68% - 425px);
+  background: linear-gradient(0deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+
+.splashScreen::after {
+  width: 102vw;
+  top: 64%;
+  left: 32vw;
+}
+
+.splashContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  animation: splashFadeIn 600ms ease-out both;
+}
+
+.splashLogo {
+  display: block;
+  width: 6.5rem;
+  height: 6.5rem;
+}
+
+.splashTitulo {
+  margin: 0;
+  font-family: inherit;
+  font-size: clamp(1.75rem, 7vw, 2.25rem);
+  line-height: 1.2;
+  letter-spacing: normal;
+  font-weight: 700;
+  color: var(--splashWhite);
+}
+
+.splashBotao {
+  margin-top: 1.5rem;
+  min-width: 12rem;
+  min-height: 3.5rem; /* alvo de toque grande (WCAG 2.5.5) */
+  padding: 0.75rem 2rem;
+  border: 0;
+  border-radius: 1rem;
+  background: var(--splashWhite);
+  color: var(--splashGreenDark);
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.splashBotao:hover {
+  background: #e3f3ea;
+}
+
+.splashBotao:focus-visible {
+  outline: 4px solid var(--splashFocus);
+  outline-offset: 4px;
+}
+
+@keyframes splashFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Respeita quem desativa animações no sistema (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  .splashContent {
+    animation: none;
+  }
+}
+
+/* Modo de alto contraste do Windows: mantém verde e branco (contraste já é alto) */
+@media (forced-colors: active) {
+  .splashScreen {
+    forced-color-adjust: none;
+  }
+
+  .splashBotao {
+    border: 2px solid ButtonText;
+  }
+}
+
+/* Em telas largas (tablet/desktop) os círculos param de crescer */
+@media (min-width: 40rem) {
+  .splashScreen::before {
+    width: 36rem;
+    left: -10rem;
+  }
+
+  .splashScreen::after {
+    width: 40rem;
+    left: auto;
+    right: -14rem;
+  }
+}
