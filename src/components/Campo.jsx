@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Campo.css'
 
-function Campo({ id, rotulo, tipo = 'text', valor, aoMudar, placeholder, erro, autoComplete }) {
+function Campo({ id, rotulo, tipo = 'text', valor, aoMudar, placeholder, erro, autoComplete, inputMode }) {
   const [mostrar, setMostrar] = useState(false)
   const ehSenha = tipo === 'password'
   const tipoReal = ehSenha && mostrar ? 'text' : tipo
@@ -19,6 +19,7 @@ function Campo({ id, rotulo, tipo = 'text', valor, aoMudar, placeholder, erro, a
           onChange={(e) => aoMudar(e.target.value)}
           placeholder={placeholder}
           autoComplete={autoComplete}
+          inputMode={inputMode}
           aria-invalid={erro ? 'true' : 'false'}
           aria-describedby={erro ? `${id}-erro` : undefined}
         />
