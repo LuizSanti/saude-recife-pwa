@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import logoSaudeSenior from '../assets/logoSaudeSenior.svg'
-import './splashScreen.css'
+import './SplashScreen.css'
 
 function SplashScreen({
   title = 'Saúde Sênior',

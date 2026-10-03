@@ -1,4 +1,3 @@
-
 :root {
   --splashGreen: #00854f;
   --splashGreenDark: #005c37;
@@ -6,13 +5,11 @@
   --splashFocus: #ffe066;
 }
 
-/* fundo verde */
+/* fundo verde: ocupa a janela inteira, mesmo dentro do #root de 430px */
 .splashScreen {
-  position: relative;
+  position: fixed;
+  inset: 0;
   box-sizing: border-box;
-  width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +30,7 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
-opacity: 0.1;
+  opacity: 0.1;
   pointer-events: none;
 }
 
@@ -45,7 +42,6 @@ opacity: 0.1;
   left: calc(68% - 425px);
   background: linear-gradient(0deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
 }
-
 
 .splashScreen::after {
   width: 102vw;
@@ -132,16 +128,21 @@ opacity: 0.1;
   }
 }
 
-/* Em telas largas (tablet/desktop) os círculos param de crescer */
+/* Desktop: círculos proporcionais à janela, cada um no seu canto */
 @media (min-width: 40rem) {
+  /* canto superior esquerdo */
   .splashScreen::before {
-    width: 36rem;
-    left: -10rem;
+    width: 40vw;
+    top: -16vw;
+    left: -8vw;
   }
 
+  /* canto inferior direito */
   .splashScreen::after {
-    width: 40rem;
+    width: 45vw;
+    top: auto;
     left: auto;
-    right: -14rem;
+    right: -10vw;
+    bottom: -18vw;
   }
 }
