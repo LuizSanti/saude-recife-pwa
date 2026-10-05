@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   max-width: 100%;
-  padding: 16px;
+  padding: 16px 28px;
 }
 
 .lista-opcoes-rotulo {
@@ -81,7 +81,7 @@
 
 @media (min-width: 768px) {
   .lista-opcoes {
-    padding: 24px;
+    padding: 24px 32px;
   }
 
   .lista-opcoes-botao {
