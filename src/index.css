@@ -5,6 +5,8 @@
   --erro: #f30000;
   --alerta: #f89603;
   --cinza-texto: #6b6b6b;
+  --branco: #ffffff;
+  --preto: #000000;
 
   /* largura máxima do conteúdo no computador (muda só aqui) */
   --largura-conteudo: 720px;
@@ -13,22 +15,48 @@
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 18px;
   color: #000000;
+  --raio-borda: 10px;
+  --altura-botao: 60px;
+  --largura-app: 430px;
+
+  font-family: 'DM Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-size: 112.5%; /* 18px, mas respeita o zoom de fonte do aparelho */
+  line-height: 1.5;
+  color: var(--preto);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html,
 body {
   min-height: 100vh;
   background: #ffffff;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body {
+  background: var(--branco);
+  display: flex;
+  justify-content: center;
 }
 
 #root {
   width: 100%;
+  max-width: var(--largura-app);
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 button,
@@ -36,14 +64,19 @@ input {
   font-family: inherit;
 }
 
+:focus-visible {
+  outline: 3px solid var(--verde-escuro);
+  outline-offset: 3px;
+}
+
 .botao-principal {
   width: 100%;
-  height: 60px;
+  min-height: var(--altura-botao);
   background: var(--verde);
-  color: #ffffff;
+  color: var(--branco);
   border: none;
-  border-radius: 10px;
-  font-size: 22px;
+  border-radius: var(--raio-borda);
+  font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
 }
