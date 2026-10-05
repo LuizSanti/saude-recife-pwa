@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './ListaOpcoes.css'
+import lupaIcone from '../assets/lupaIcone.svg'
 
 function normalizar(texto) {
   return texto
@@ -20,15 +21,19 @@ function ListaOpcoes({ opcoes, aoSelecionar, rotulo = 'Pesquisar', mensagemVazia
       <label htmlFor="lista-opcoes-busca" className="lista-opcoes-rotulo">
         {rotulo}
       </label>
-      <input
-        id="lista-opcoes-busca"
-        type="search"
-        className="lista-opcoes-busca"
-        placeholder={rotulo}
-        value={busca}
-        onChange={(e) => setBusca(e.target.value)}
-        autoComplete="off"
-      />
+
+      <div className="lista-opcoes-campo">
+        <img src={lupaIcone} alt="" className="lista-opcoes-icone" />
+        <input
+          id="lista-opcoes-busca"
+          type="search"
+          className="lista-opcoes-busca"
+          placeholder={rotulo}
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+          autoComplete="off"
+        />
+      </div>
 
       <p className="lista-opcoes-status" aria-live="polite">
         {filtradas.length === 0 ? mensagemVazia : ''}
