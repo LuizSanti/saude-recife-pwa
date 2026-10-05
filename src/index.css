@@ -6,6 +6,10 @@
   --alerta: #f89603;
   --cinza-texto: #6b6b6b;
 
+  /* largura máxima do conteúdo no computador (muda só aqui) */
+  --largura-conteudo: 720px;
+  --margem-tela: max(28px, calc((100% - var(--largura-conteudo)) / 2));
+
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 18px;
   color: #000000;
@@ -17,22 +21,13 @@
   padding: 0;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 body {
-  background: #ffffff;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
+  background: #ffffff;
 }
 
 #root {
   width: 100%;
-  max-width: 430px;
   min-height: 100vh;
 }
 
