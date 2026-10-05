@@ -17,6 +17,12 @@
   padding: 0;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   background: #ffffff;
   min-height: 100vh;

@@ -1,5 +1,6 @@
 import ListaOpcoes from '../components/ListaOpcoes'
 import './EscolherEspecialidade.css'
+import BarraNavegacao from '../components/BarraNavegacao'
 
 const ESPECIALIDADES_MOCK = [
   { id: 1, nome: 'Cardiologia' },
@@ -13,7 +14,7 @@ const ESPECIALIDADES_MOCK = [
 
 const TOTAL_ETAPAS = 3
 
-function EscolherEspecialidade({ aoVoltar, aoSelecionar }) {
+function EscolherEspecialidade({ aoVoltar, aoSelecionar, aoNavegar }) {
   return (
     <main className="escolher-especialidade">
       <header className="escolher-especialidade-topo">
@@ -56,6 +57,8 @@ function EscolherEspecialidade({ aoVoltar, aoSelecionar }) {
         rotulo="Pesquisar especialidade"
         mensagemVazia="Nenhuma especialidade encontrada."
       />
+
+      <BarraNavegacao itemAtivo="consultas" aoNavegar={aoNavegar} />
     </main>
   )
 }
