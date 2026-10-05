@@ -1,0 +1,81 @@
+.lista-opcoes {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  padding: 16px;
+}
+
+.lista-opcoes-rotulo {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.lista-opcoes-busca {
+  width: 100%;
+  height: 60px;
+  padding: 0 16px;
+  font-size: 20px;
+  color: #000000;
+  background: #ffffff;
+  border: 2px solid var(--cinza-texto);
+  border-radius: 12px;
+}
+
+.lista-opcoes-busca:focus-visible,
+.lista-opcoes-botao:focus-visible {
+  outline: 4px solid var(--alerta);
+  outline-offset: 2px;
+}
+
+.lista-opcoes-status {
+  font-size: 20px;
+}
+
+.lista-opcoes-status:not(:empty) {
+  margin-top: 12px;
+}
+
+.lista-opcoes-itens {
+  margin-top: 8px;
+  list-style: none;
+}
+
+.lista-opcoes-botao {
+  display: block;
+  width: 100%;
+  min-height: 64px;
+  padding: 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+  color: #000000;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--cinza-texto);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.lista-opcoes-botao:active {
+  background: var(--verde-claro);
+}
+
+@media (min-width: 768px) {
+  .lista-opcoes {
+    padding: 24px;
+  }
+
+  .lista-opcoes-botao {
+    min-height: 72px;
+    padding: 0 16px;
+    font-size: 22px;
+  }
+
+  .lista-opcoes-botao:hover {
+    background: var(--verde-claro);
+  }
+}
