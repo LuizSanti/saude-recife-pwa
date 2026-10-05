@@ -15,20 +15,24 @@
   top: 0;
   z-index: 10;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
-  padding: 16px;
+  min-height: 120px;
+  padding: 16px 16px 0;
   background: var(--verde);
   color: #ffffff;
-  border-radius: 0 0 30px 30px;
+  border-radius: 0 0 17px 17px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .escolher-especialidade-voltar {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 56px;
   height: 56px;
-  font-size: 32px;
-  color: inherit;
+  padding: 0;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -39,9 +43,18 @@
   outline-offset: 2px;
 }
 
+.escolher-especialidade-icone {
+  width: 20px;
+  height: 33px;
+}
+
 .escolher-especialidade-titulo {
   flex: 1;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
   padding-right: 56px;
   font-family: 'Open Sans', system-ui, sans-serif;
   font-size: 24px;
@@ -51,9 +64,10 @@
   text-align: center;
   overflow-wrap: anywhere;
 }
+
 .escolher-especialidade-subtitulo {
   min-width: 0;
-  margin: 20px 16px 12px;
+  margin: 28px 28px 16px;
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 0.4px;
@@ -65,15 +79,15 @@
 
 .escolher-especialidade-etapas {
   display: flex;
-  gap: 8px;
-  padding: 0 16px;
+  gap: 10px;
+  padding: 0 28px;
 }
 
 .escolher-especialidade-etapa {
   flex: 1;
-  height: 8px;
-  border-radius: 4px;
-  background: var(--verde-claro);
+  height: 10px;
+  border-radius: 5px;
+  background: #c4d3ec;
 }
 
 .escolher-especialidade-etapa-ativa {
@@ -87,7 +101,7 @@
   }
 
   .escolher-especialidade-topo {
-    padding: 24px;
+    padding: 24px 24px 0;
   }
 
   .escolher-especialidade-titulo {
@@ -95,11 +109,11 @@
   }
 
   .escolher-especialidade-subtitulo {
-    margin: 32px 24px 16px;
-    font-size: 30px;
+    margin: 36px 32px 20px;
+    font-size: 28px;
   }
 
   .escolher-especialidade-etapas {
-    padding: 0 24px;
+    padding: 0 32px;
   }
 }

@@ -1,6 +1,7 @@
 import ListaOpcoes from '../components/ListaOpcoes'
-import './EscolherEspecialidade.css'
 import BarraNavegacao from '../components/BarraNavegacao'
+import voltaIcone from '../assets/voltaIcone.svg'
+import './EscolherEspecialidade.css'
 
 const ESPECIALIDADES_MOCK = [
   { id: 1, nome: 'Cardiologia' },
@@ -24,7 +25,7 @@ function EscolherEspecialidade({ aoVoltar, aoSelecionar, aoNavegar }) {
           onClick={aoVoltar}
           aria-label="Voltar"
         >
-          ←
+          <img src={voltaIcone} alt="" className="escolher-especialidade-icone" />
         </button>
         <h1 className="escolher-especialidade-titulo">ESPECIALIDADE</h1>
       </header>
@@ -58,7 +59,7 @@ function EscolherEspecialidade({ aoVoltar, aoSelecionar, aoNavegar }) {
         mensagemVazia="Nenhuma especialidade encontrada."
       />
 
-      <BarraNavegacao itemAtivo="consultas" aoNavegar={aoNavegar} />
+      <BarraNavegacao aoNavegar={aoNavegar} />
     </main>
   )
 }
