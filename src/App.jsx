@@ -5,6 +5,7 @@ import Cadastro from './auth/Cadastro'
 import Inicio from './paciente/Inicio'
 import InicioMedico from './medico/InicioMedico'
 import InicioAdmin from './adm/InicioAdmin'
+import EscolherEspecialidade from './paciente/EscolherEspecialidade'
 import SplashScreen from './components/SplashScreen'
 import RotaProtegida from './routes/RotaProtegida'
 
@@ -29,6 +30,7 @@ function App() {
 
       <Route element={<RotaProtegida perfis={['PACIENTE']} />}>
         <Route path="/inicio" element={<Inicio />} />
+        <Route path="/especialidades" element={<EscolherEspecialidade />} />
       </Route>
 
       <Route element={<RotaProtegida perfis={['PROFISSIONAL']} />}>
