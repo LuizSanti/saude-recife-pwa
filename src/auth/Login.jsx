@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Campo from '../components/Campo'
 import { useAuth } from '../hooks/useAuth'
+import { AREA_POR_PERFIL } from '../routes/areas'
 import './Login.css'
 
 function Login() {
@@ -33,8 +34,8 @@ function Login() {
 
     setCarregando(true)
     try {
-      await entrar(email.trim(), senha)
-      navigate('/inicio')
+      const logado = await entrar(email.trim(), senha)
+      navigate(AREA_POR_PERFIL[logado.tipoUsuario])
     } catch (err) {
       setErroGeral(err.message)
     } finally {
