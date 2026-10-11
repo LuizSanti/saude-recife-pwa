@@ -1,4 +1,4 @@
-.escolher-especialidade {
+.tela-escolha {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -8,7 +8,7 @@
   overflow-x: clip;
 }
 
-.escolher-especialidade-topo {
+.tela-escolha-topo {
   position: sticky;
   top: 0;
   z-index: 10;
@@ -23,7 +23,7 @@
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.escolher-especialidade-voltar {
+.tela-escolha-voltar {
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -36,17 +36,17 @@
   cursor: pointer;
 }
 
-.escolher-especialidade-voltar:focus-visible {
+.tela-escolha-voltar:focus-visible {
   outline: 4px solid var(--alerta);
   outline-offset: 2px;
 }
 
-.escolher-especialidade-icone {
+.tela-escolha-icone {
   width: 20px;
   height: 33px;
 }
 
-.escolher-especialidade-titulo {
+.tela-escolha-titulo {
   flex: 1;
   min-width: 0;
   display: flex;
@@ -63,7 +63,7 @@
   overflow-wrap: anywhere;
 }
 
-.escolher-especialidade-subtitulo {
+.tela-escolha-subtitulo {
   min-width: 0;
   margin: 42px var(--margem-tela) 28px 32px;
   font-size: 24px;
@@ -75,34 +75,34 @@
   overflow-wrap: anywhere;
 }
 
-.escolher-especialidade-etapas {
+.tela-escolha-etapas {
   display: flex;
   gap: 10px;
   padding: 0 var(--margem-tela);
 }
 
-.escolher-especialidade-etapa {
+.tela-escolha-etapa {
   flex: 1;
   height: 10px;
   border-radius: 5px;
   background: #c4d3ec;
 }
 
-.escolher-especialidade-etapa-ativa {
+.tela-escolha-etapa-ativa {
   background: var(--verde);
 }
 
 @media (min-width: 768px) {
-  .escolher-especialidade-topo {
+  .tela-escolha-topo {
     padding: 24px max(24px, calc((100% - var(--largura-conteudo)) / 2)) 0;
   }
 
-  .escolher-especialidade-titulo {
+  .tela-escolha-titulo {
     font-size: 28px;
   }
 
-  .escolher-especialidade-subtitulo {
-    margin: 48px var(--margem-tela)32px 36px;
+  .tela-escolha-subtitulo {
+    margin: 48px var(--margem-tela) 32px 36px;
     font-size: 28px;
   }
-} 
+}
