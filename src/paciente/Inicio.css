@@ -1,0 +1,354 @@
+.inicio {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 27px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inicio button:focus-visible {
+  outline: 3px solid var(--verde);
+  outline-offset: 3px;
+}
+
+/* Cabeçalho */
+.inicio-topo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.inicio-avatar {
+  width: 67px;
+  height: 67px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--verde-escuro);
+  background: var(--verde-claro);
+  border-radius: 50%;
+}
+
+.inicio-saudacao {
+  flex: 1;
+  min-width: 0;
+}
+
+.inicio-bemvindo {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.4px;
+  color: #858585;
+}
+
+.inicio-nome {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.inicio-sino {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.inicio-sino svg {
+  width: 32px;
+  height: 32px;
+}
+
+.inicio-sino-ponto {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 12px;
+  height: 12px;
+  background: var(--erro);
+  border-radius: 50%;
+}
+
+/* Busca */
+.inicio-busca {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  height: 60px;
+  padding: 0 20px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+  color: var(--cinza-texto);
+  background: rgba(217, 217, 217, 0.3);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.inicio-busca-lupa {
+  width: 22px;
+  height: 22px;
+}
+
+.inicio-busca-texto {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inicio-busca svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* Atalhos */
+.inicio-atalhos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.inicio-atalho {
+  min-height: 170px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.48px;
+  text-align: center;
+  color: #ffffff;
+  background: var(--verde);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.inicio-atalho svg {
+  width: 56px;
+  height: 56px;
+}
+
+/* Triagem com IA */
+.inicio-triagem {
+  min-height: 117px;
+  padding: 24px 28px;
+  color: #ffffff;
+  background: #0a5723;
+  border-radius: 10px;
+}
+
+.inicio-triagem h2 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.52px;
+}
+
+.inicio-triagem p {
+  max-width: 220px;
+  margin-top: 8px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+/* Próxima consulta */
+.inicio-proxima-titulo {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  border-bottom: 3px solid #1f8ba5;
+}
+
+.inicio-consulta {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  padding: 44px 20px 22px 20px;
+  background: #ffffff;
+  border-left: 20px solid #f37a21;
+  border-radius: 14px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.inicio-consulta-status {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  padding: 3px 12px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #166534;
+  background: #dcfce7;
+  border-radius: 14px;
+}
+
+.inicio-consulta-data {
+  min-width: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+
+.inicio-consulta-mes {
+  font-size: 20px;
+  color: var(--verde-escuro);
+}
+
+.inicio-consulta-dia {
+  font-size: 28px;
+}
+
+.inicio-consulta-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inicio-consulta-medico {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.inicio-consulta-especialidade {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--verde-escuro);
+}
+
+.inicio-consulta-hora {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #475576;
+}
+
+.inicio-consulta-hora svg {
+  width: 18px;
+  height: 18px;
+  color: var(--verde);
+}
+
+.inicio-consulta-local {
+  font-size: 18px;
+  color: #475576;
+}
+
+.inicio-vazio {
+  font-size: 18px;
+  color: var(--cinza-texto);
+}
+
+.inicio-sair {
+  align-self: flex-start;
+  padding: 8px 4px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cinza-texto);
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Computador e tablet */
+@media (min-width: 900px) {
+  .inicio {
+    max-width: 1100px;
+    padding: 40px 48px 120px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    grid-template-areas:
+      'topo topo'
+      'busca busca'
+      'atalhos proxima'
+      'triagem proxima'
+      'sair sair';
+    align-items: start;
+    gap: 28px 40px;
+  }
+
+  .inicio-topo {
+    grid-area: topo;
+  }
+
+  .inicio-busca {
+    grid-area: busca;
+  }
+
+  .inicio-atalhos {
+    grid-area: atalhos;
+  }
+
+  .inicio-triagem {
+    grid-area: triagem;
+  }
+
+  .inicio-proxima {
+    grid-area: proxima;
+  }
+
+  .inicio-sair {
+    grid-area: sair;
+  }
+
+  .inicio-atalho {
+    min-height: 190px;
+  }
+
+}
+
+/* Barra de navegação fixa no rodapé */
+.inicio > .barra-navegacao {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background: #ffffff;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.inicio > .barra-navegacao .barra-navegacao-lista {
+  max-width: 640px;
+  margin: 0 auto;
+}
