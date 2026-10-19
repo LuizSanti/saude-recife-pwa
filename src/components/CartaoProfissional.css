@@ -1,0 +1,131 @@
+.cartao-profissional {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: calc(100% - 32px);  
+  max-width: var(--largura-conteudo);
+  margin: 0 auto;
+  padding: 24px 16px;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.cartao-profissional-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cartao-profissional-foto {
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 100px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.cartao-profissional-iniciais {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #c4d3ec;
+  color: var(--verde);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.cartao-profissional-dados {
+  flex: 1;
+  min-width: 0;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--verde-escuro);
+}
+
+.cartao-profissional-linha {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cartao-profissional-nome {
+  min-width: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.cartao-profissional-distancia {
+  flex-shrink: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.cartao-profissional-especialidade {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cartao-profissional-crm {
+  margin-top: 2px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #595959;
+}
+
+.cartao-profissional-crm-rotulo {
+  font-weight: 700;
+  color: var(--verde-escuro);
+}
+
+.cartao-profissional-local {
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+
+.cartao-profissional-unidade {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--verde-escuro);
+  overflow-wrap: anywhere;
+}
+
+.cartao-profissional-icone {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+}
+
+.cartao-profissional-endereco {
+  margin-top: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #555b6c;
+  overflow-wrap: anywhere;
+}
+
+.cartao-profissional-botao {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 16px;
+  background: var(--laranja, #b85300); /*cor com base o wcag*/
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Open Sans', system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cartao-profissional-botao:focus-visible {
+  outline: 4px solid var(--alerta);
+  outline-offset: 2px;
+}

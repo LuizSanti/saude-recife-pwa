@@ -1,5 +1,7 @@
 # Saúde na Palma da Mão — Frontend (PWA)
 
+> Nome do repositório: `saude-recife-pwa`
+
 Progressive Web App do Projeto Integrador "Saúde na Palma da Mão" (também referenciado como "Saúde Recife" no material do professor), voltado à pré-triagem e agendamento de consultas, com foco inicial no público idoso (60+ anos).
 
 ## Sobre o projeto
@@ -13,6 +15,8 @@ Repositório irmão: `saude-palma-backend` (API).
 ## Stack
 
 - **Biblioteca:** React
+- **Build tool:** Vite
+- **Linter:** Oxlint
 - **Tipo de aplicação:** PWA (Progressive Web App)
 - **Comunicação com API:** REST / JSON
 - **Deploy:** Vercel
@@ -44,7 +48,7 @@ public/
 ```bash
 # Clonar o repositório
 git clone <url-do-repositorio>
-cd saude-palma-frontend
+cd saude-recife-pwa
 
 # Instalar dependências
 npm install
@@ -53,9 +57,17 @@ npm install
 cp .env.example .env
 # Edite com a URL da API local
 
-# Rodar em modo desenvolvimento
+# Rodar em modo desenvolvimento (Vite)
 npm run dev
 ```
+
+## Lint
+
+```bash
+npm run lint
+```
+
+Este projeto usa **Oxlint**. Para type-checking mais rigoroso (recomendado à medida que o projeto cresce), considerar adotar TypeScript — ver [template oficial Vite + React + TS](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts).
 
 ## Variáveis de configuração necessárias
 
@@ -73,6 +85,12 @@ Enquanto endpoints da API ainda não estiverem prontos, usar dados mockados (JSO
 
 ```bash
 npm run build
+```
+
+Vite gera a build otimizada em `dist/`. Para pré-visualizar localmente:
+
+```bash
+npm run preview
 ```
 
 ## Deploy

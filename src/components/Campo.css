@@ -1,0 +1,65 @@
+.campo {
+  margin-bottom: 20px;
+}
+
+.campo-rotulo {
+  display: block;
+  margin-bottom: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.campo-caixa {
+  position: relative;
+}
+
+.campo-caixa input {
+  width: 100%;
+  height: 60px;
+  padding: 0 56px 0 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  background: rgba(217, 217, 217, 0.3);
+  border: 1px solid rgba(133, 133, 133, 0.3);
+  border-radius: 10px;
+}
+
+.campo-caixa input::placeholder {
+  color: var(--cinza-texto);
+}
+
+.campo-caixa input:focus {
+  outline: 3px solid var(--verde);
+  outline-offset: 2px;
+}
+
+.campo-olho {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  padding: 8px;
+  color: var(--verde);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.campo-olho svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.campo-erro {
+  margin-top: 6px;
+  font-size: 16px;
+  color: var(--erro);
+}

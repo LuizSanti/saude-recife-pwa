@@ -1,0 +1,30 @@
+.cadastro {
+  padding: 60px 27px 40px;
+}
+
+.cadastro-titulo {
+  margin-bottom: 40px;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--verde);
+}
+
+.cadastro-erro {
+  margin-bottom: 16px;
+  font-size: 18px;
+  text-align: center;
+  color: var(--erro);
+}
+
+.cadastro-rodape {
+  margin-top: 32px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--cinza-texto);
+}
+
+.cadastro-rodape a {
+  font-weight: 700;
+  color: var(--verde-escuro);
+}
