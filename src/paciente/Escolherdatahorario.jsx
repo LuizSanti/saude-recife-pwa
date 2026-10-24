@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import voltaIcone from '../assets/voltaIcone.svg'
 import { criarAgendamento } from '../services/agendamentosService'
+import { useAgendamento } from '../context/AgendamentoContext'
 import './Escolherdatahorario.css'
 
 const DIAS_SEMANA = [
@@ -34,7 +35,8 @@ function montarGrade(ano, mes) {
 function EscolherDataHorario() {
   const navigate = useNavigate()
   const { state } = useLocation()
-  const { unidade, profissional } = state ?? {}
+  const { unidade, profissional, especialidade, exame } = state ?? {}
+  const { limpar } = useAgendamento()
 
   const hoje = inicioDoDia(new Date())
   const [ano, setAno] = useState(hoje.getFullYear())
@@ -73,7 +75,14 @@ function EscolherDataHorario() {
     setEnviando(true)
     setErro('')
     try {
-      await criarAgendamento({ unidade, profissional, dataHora })
+      await criarAgendamento({
+        unidade,
+        profissional,
+        especialidade,
+        exame,
+        dataHora,
+      })
+      limpar()
       navigate('/agendamento/confirmado', {
         replace: true,
         state: { dataHora, unidade, profissional },

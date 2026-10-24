@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom'
 import TelaEscolha from '../components/TelaEscolha'
+import { useAgendamento } from '../context/AgendamentoContext'
 
 const UNIDADES_MOCK = [
   { id: 1, nome: 'Hospital Esperança' },
@@ -8,7 +10,15 @@ const UNIDADES_MOCK = [
   { id: 5, nome: 'Clínica Joana Bezerra' },
 ]
 
-function EscolherUnidade({ aoVoltar, aoSelecionar, aoNavegar }) {
+function EscolherUnidade({ aoVoltar, aoNavegar }) {
+  const navigate = useNavigate()
+  const { atualizar } = useAgendamento()
+
+  function selecionar(unidade) {
+    atualizar({ unidade })
+    navigate('/escolher-profissional')
+  }
+
   return (
     <TelaEscolha
       titulo="UNIDADE"
@@ -17,8 +27,8 @@ function EscolherUnidade({ aoVoltar, aoSelecionar, aoNavegar }) {
       opcoes={UNIDADES_MOCK}
       rotuloBusca="Pesquisar unidade"
       mensagemVazia="Nenhuma unidade encontrada."
-      aoVoltar={aoVoltar}
-      aoSelecionar={aoSelecionar}
+      aoVoltar={aoVoltar ?? (() => navigate(-1))}
+      aoSelecionar={selecionar}
       aoNavegar={aoNavegar}
     />
   )

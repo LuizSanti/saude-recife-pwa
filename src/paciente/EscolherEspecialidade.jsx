@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import TelaEscolha from '../components/TelaEscolha'
+import { useAgendamento } from '../context/AgendamentoContext'
 
 const ESPECIALIDADES_MOCK = [
   { id: 1, nome: 'Cardiologia' },
@@ -10,7 +13,20 @@ const ESPECIALIDADES_MOCK = [
   { id: 7, nome: 'Ortopedia e Traumatologia' },
 ]
 
-function EscolherEspecialidade({ aoVoltar, aoSelecionar, aoNavegar }) {
+function EscolherEspecialidade({ aoVoltar, aoNavegar }) {
+  const navigate = useNavigate()
+  const { atualizar, limpar } = useAgendamento()
+
+  // Esta tela inicia um agendamento novo: descarta escolhas anteriores
+  useEffect(() => {
+    limpar()
+  }, [limpar])
+
+  function selecionar(especialidade) {
+    atualizar({ especialidade })
+    navigate('/exames', { state: { veioDaEspecialidade: true } })
+  }
+
   return (
     <TelaEscolha
       titulo="ESPECIALIDADE"
@@ -19,8 +35,8 @@ function EscolherEspecialidade({ aoVoltar, aoSelecionar, aoNavegar }) {
       opcoes={ESPECIALIDADES_MOCK}
       rotuloBusca="Pesquisar especialidade"
       mensagemVazia="Nenhuma especialidade encontrada."
-      aoVoltar={aoVoltar}
-      aoSelecionar={aoSelecionar}
+      aoVoltar={aoVoltar ?? (() => navigate('/inicio'))}
+      aoSelecionar={selecionar}
       aoNavegar={aoNavegar}
     />
   )

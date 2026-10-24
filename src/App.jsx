@@ -14,6 +14,7 @@ import ConfirmacaoAgendamento from './paciente/ConfirmacaoAgendamento'
 import MeusAgendamentos from './paciente/MeusAgendamentos'
 import SplashScreen from './components/SplashScreen'
 import RotaProtegida from './routes/RotaProtegida'
+import { useAgendamento } from './context/AgendamentoContext'
 
 const TEMPO_SPLASH_MS = 3000
 
@@ -21,6 +22,7 @@ const ROTAS_DA_BARRA = { inicio: '/inicio', consultas: '/consultas' }
 
 function App() {
   const navigate = useNavigate()
+  const { agendamento } = useAgendamento()
   const [mostrarSplash, setMostrarSplash] = useState(true)
 
   useEffect(() => {
@@ -39,7 +41,12 @@ function App() {
 
   function agendar(profissional) {
     navigate('/data-horario', {
-      state: { profissional, unidade: profissional?.unidade },
+      state: {
+        profissional,
+        unidade: profissional?.unidade ?? agendamento.unidade?.nome,
+        especialidade: agendamento.especialidade,
+        exame: agendamento.exame,
+      },
     })
   }
 
@@ -58,32 +65,16 @@ function App() {
         <Route
           path="/especialidade"
           element={
-            <EscolherEspecialidade
-              aoVoltar={voltar}
-              aoSelecionar={console.log}
-              aoNavegar={aoNavegar}
-            />
+            <EscolherEspecialidade aoVoltar={voltar} aoNavegar={aoNavegar} />
           }
         />
         <Route
           path="/exames"
-          element={
-            <EscolherExame
-              aoVoltar={voltar}
-              aoSelecionar={console.log}
-              aoNavegar={aoNavegar}
-            />
-          }
+          element={<EscolherExame aoVoltar={voltar} aoNavegar={aoNavegar} />}
         />
         <Route
           path="/unidade"
-          element={
-            <EscolherUnidade
-              aoVoltar={voltar}
-              aoSelecionar={console.log}
-              aoNavegar={aoNavegar}
-            />
-          }
+          element={<EscolherUnidade aoVoltar={voltar} aoNavegar={aoNavegar} />}
         />
         <Route
           path="/escolher-profissional"

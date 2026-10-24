@@ -10,12 +10,15 @@ import '@fontsource/open-sans/700.css'
 import './index.css'
 import App from './App.jsx'
 import { AuthProvider } from './context/AuthProvider.jsx'
+import { AgendamentoProvider } from './context/AgendamentoContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <AgendamentoProvider>
+          <App />
+        </AgendamentoProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>,

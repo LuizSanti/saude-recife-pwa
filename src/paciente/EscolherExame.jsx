@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import TelaEscolha from '../components/TelaEscolha'
+import { useAgendamento } from '../context/AgendamentoContext'
 
 const EXAMES_MOCK = [
   { id: 1, nome: 'Antígeno Prostático Específico' },
@@ -10,7 +13,21 @@ const EXAMES_MOCK = [
   { id: 7, nome: 'Mamografia' },
 ]
 
-function EscolherExame({ aoVoltar, aoSelecionar, aoNavegar }) {
+function EscolherExame({ aoVoltar, aoNavegar }) {
+  const navigate = useNavigate()
+  const { state } = useLocation()
+  const { atualizar, limpar } = useAgendamento()
+
+  // Entrada direta por "Marcar Exame": começa um agendamento do zero
+  useEffect(() => {
+    if (!state?.veioDaEspecialidade) limpar()
+  }, [state, limpar])
+
+  function selecionar(exame) {
+    atualizar({ exame })
+    navigate('/unidade')
+  }
+
   return (
     <TelaEscolha
       titulo="EXAMES"
@@ -19,8 +36,8 @@ function EscolherExame({ aoVoltar, aoSelecionar, aoNavegar }) {
       opcoes={EXAMES_MOCK}
       rotuloBusca="Pesquisar exame"
       mensagemVazia="Nenhum exame encontrado."
-      aoVoltar={aoVoltar}
-      aoSelecionar={aoSelecionar}
+      aoVoltar={aoVoltar ?? (() => navigate(-1))}
+      aoSelecionar={selecionar}
       aoNavegar={aoNavegar}
     />
   )
