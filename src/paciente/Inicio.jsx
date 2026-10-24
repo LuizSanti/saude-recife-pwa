@@ -6,14 +6,12 @@ import {
   IconePrancheta,
   IconeRelogio,
   IconeSino,
-} from '../components/Icones'
+} from '../components/icones'
 import { useAuth } from '../hooks/useAuth'
 import lupaIcone from '../assets/lupaIcone.svg'
 import { proximaConsultaMock } from '../services/mocks/consultas'
 import './Inicio.css'
 
-// Por enquanto só o Início existe. Quando as telas de Consultas e Perfil
-// forem criadas, é só colocar a rota delas aqui.
 const ROTAS_DA_BARRA = { inicio: '/inicio' }
 
 function doisPrimeirosNomes(nome = '') {
@@ -48,7 +46,7 @@ function Inicio() {
         </div>
         <div className="inicio-saudacao">
           <p className="inicio-bemvindo">Bem vindo</p>
-          <h1 className="inicio-nome">{doisPrimeirosNomes(usuario?.nome)}</h1>
+          <h1 className="inicio-nome">{doisPrimeirosNomes(usuario?.nome) || 'Paciente'}</h1>
         </div>
         <button type="button" className="inicio-sino" aria-label="Notificações">
           <IconeSino />
