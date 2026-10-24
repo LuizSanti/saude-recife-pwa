@@ -1,0 +1,226 @@
+/* Medidas tiradas do Figma (frame de 430px de largura, sem a barra de status de 44px).
+   --px vale 1px em telas de 430px ou mais e encolhe proporcionalmente nas menores,
+   então a tela fica idêntica ao Figma em qualquer largura de celular. */
+
+.datahora {
+  --px: min(0.23256vw, 1px);
+  --verde: #00985d;
+  --cinza: #858585;
+  --pilula: rgba(217, 217, 217, 0.3);
+  --cor-foco: #ffbf00;
+
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background: #fff;
+  color: #000;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-variation-settings: 'opsz' 14;
+}
+
+.datahora button {
+  font-family: inherit;
+}
+
+.datahora button:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+
+/* Seta de voltar: mesmo SVG das outras telas, pintado de preto */
+.datahora-voltar {
+  align-self: flex-start;
+  margin: calc(26 * var(--px) - 12px) 0 0 calc(31 * var(--px) - 14px);
+  padding: 12px 14px;
+  background: none;
+  border: none;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.datahora-voltar-icone {
+  display: block;
+  width: calc(20 * var(--px));
+  height: calc(33 * var(--px));
+  filter: brightness(0);
+}
+
+.datahora-titulo {
+  margin: calc(30 * var(--px) - 12px) 0 0;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: calc(24 * var(--px));
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: calc(-0.48 * var(--px));
+}
+
+/* Calendário */
+.datahora-calendario {
+  margin: calc(33 * var(--px)) calc(25 * var(--px)) 0;
+}
+
+.datahora-mes {
+  position: relative;
+  height: calc(28 * var(--px));
+  margin-bottom: calc(21.6 * var(--px));
+}
+
+.datahora-mes-nome {
+  position: absolute;
+  left: calc(1.2 * var(--px));
+  top: 0;
+  font-size: calc(20.262 * var(--px));
+  font-weight: 400;
+}
+
+.datahora-ano {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: calc(21.24 * var(--px));
+  font-weight: 700;
+  color: var(--verde);
+}
+
+.datahora-mes-nav {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+}
+
+.datahora-mes-seta {
+  min-width: 44px;
+  min-height: 44px;
+  background: none;
+  border: none;
+  font-size: calc(28 * var(--px));
+  line-height: 1;
+  color: var(--verde);
+  cursor: pointer;
+}
+
+.datahora-mes-seta:disabled {
+  color: var(--cinza);
+  opacity: 0.5;
+  cursor: default;
+}
+
+.datahora-grade {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+  width: calc(408 * var(--px));
+  margin-left: calc(-14.75 * var(--px));
+}
+
+.datahora-semana {
+  height: calc(26.5 * var(--px));
+  margin-bottom: calc(2.9 * var(--px));
+  font-size: calc(20.262 * var(--px));
+  font-weight: 700;
+  line-height: calc(26.5 * var(--px));
+  text-decoration: none;
+}
+
+.datahora-dia {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: calc(63.7 * var(--px));
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: calc(20.262 * var(--px));
+  font-weight: 400;
+  color: #000;
+  cursor: pointer;
+}
+
+/* Dias de outros meses e dias que já passaram */
+.datahora-dia:disabled {
+  color: var(--cinza);
+  cursor: default;
+}
+
+.datahora-dia-num {
+  display: grid;
+  place-items: center;
+  width: calc(35 * var(--px));
+  height: calc(35 * var(--px));
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.datahora-dia-ativo .datahora-dia-num {
+  background: var(--verde);
+  color: #fff;
+}
+
+/* Horários */
+.datahora-subtitulo {
+  margin: calc(42.5 * var(--px)) calc(25 * var(--px)) 0;
+  font-size: calc(24 * var(--px));
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: calc(-0.48 * var(--px));
+}
+
+.datahora-horarios {
+  display: flex;
+  justify-content: space-between;
+  margin: calc(46.5 * var(--px)) calc(27 * var(--px)) calc(24 * var(--px));
+}
+
+.datahora-horario {
+  padding: calc(18 * var(--px)) calc(24 * var(--px));
+  background: var(--pilula);
+  border: none;
+  border-radius: calc(10 * var(--px));
+  font-size: calc(20 * var(--px));
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: calc(-0.4 * var(--px));
+  color: #000;
+  cursor: pointer;
+}
+
+.datahora-horario-ativo {
+  background: var(--verde);
+  color: #fff;
+}
+
+.datahora-erro {
+  margin: 0 calc(27 * var(--px)) 12px;
+  font-size: 1rem;
+  color: #b00020;
+}
+
+.datahora-confirmar {
+  margin: auto calc(26.72 * var(--px)) calc(58.6 * var(--px));
+  height: calc(60 * var(--px));
+  min-height: 56px;
+  background: var(--verde);
+  border: none;
+  border-radius: calc(10 * var(--px));
+  font-family: 'Open Sans', 'DM Sans', system-ui, sans-serif;
+  font-size: calc(22 * var(--px));
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: calc(-0.44 * var(--px));
+  color: #fff;
+  cursor: pointer;
+}
+
+.datahora-confirmar:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
