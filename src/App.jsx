@@ -9,6 +9,7 @@ import EscolherEspecialidade from './paciente/EscolherEspecialidade'
 import EscolherExame from './paciente/EscolherExame'
 import EscolherUnidade from './paciente/EscolherUnidade'
 import EscolherProfissional from './paciente/EscolherProfissional'
+import MeusAgendamentos from './paciente/MeusAgendamentos'
 import SplashScreen from './components/SplashScreen'
 import RotaProtegida from './routes/RotaProtegida'
 
@@ -33,6 +34,7 @@ function App() {
 
       <Route element={<RotaProtegida perfis={['PACIENTE']} />}>
         <Route path="/inicio" element={<Inicio />} />
+        <Route path="/consultas" element={<MeusAgendamentos />} />
         <Route path="/especialidade" element={<EscolherEspecialidade aoVoltar={() => window.history.back()} aoSelecionar={console.log} aoNavegar={console.log} />} />
         <Route path="/exames" element={<EscolherExame aoVoltar={() => window.history.back()} aoSelecionar={console.log} aoNavegar={console.log} />} />
         <Route path="/unidade" element={<EscolherUnidade aoVoltar={() => window.history.back()} aoSelecionar={console.log} aoNavegar={console.log} />} />
@@ -43,7 +45,7 @@ function App() {
         <Route path="/profissional" element={<InicioMedico />} />
       </Route>
 
-      <Route element={<RotaProtegida perfis={['ADMINISTRADOR']} />}>
+      <Route element={<RotaProtegida perfis={['ADMIN']} />}>
         <Route path="/admin" element={<InicioAdmin />} />
       </Route>
 
@@ -58,3 +60,4 @@ export default App
 // http://localhost:xxxx/exames
 // http://localhost:xxxx/unidade
 // http://localhost:xxxx/escolher-profissional
+// http://localhost:xxxx/consultas
