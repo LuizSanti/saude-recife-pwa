@@ -48,7 +48,8 @@ function MeusAgendamentos() {
 
   const termo = busca.trim().toLowerCase()
   const filtrados = agendamentos.filter((a) =>
-    [a.profissional, a.especialidade, a.unidade]
+    [a.medico, a.especialidade, a.clinica, a.exame]
+      .filter(Boolean)
       .join(' ')
       .toLowerCase()
       .includes(termo),

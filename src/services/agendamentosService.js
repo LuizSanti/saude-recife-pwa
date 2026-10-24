@@ -69,5 +69,9 @@ export async function criarAgendamento({
 }
 
 export async function cancelarAgendamento(id) {
-  salvar(ler().map((a) => (a.id === id ? { ...a, status: 'CANCELADA' } : a)))
+  const atualizados = ler().map((a) =>
+    a.id === id ? { ...a, status: 'CANCELADA' } : a,
+  )
+  salvar(atualizados)
+  return atualizados
 }

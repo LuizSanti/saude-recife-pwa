@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BarraNavegacao from '../components/BarraNavegacao'
 import {
@@ -10,9 +11,10 @@ import {
 import { useAuth } from '../hooks/useAuth'
 import lupaIcone from '../assets/lupaIcone.svg'
 import { proximaConsultaMock } from '../services/mocks/consultas'
+import { listarAgendamentos } from '../services/agendamentosService'
 import './Inicio.css'
 
-const ROTAS_DA_BARRA = { inicio: '/inicio' }
+const ROTAS_DA_BARRA = { inicio: '/inicio', consultas: '/consultas' }
 
 function doisPrimeirosNomes(nome = '') {
   return nome.trim().split(/\s+/).slice(0, 2).join(' ')
@@ -23,10 +25,28 @@ function iniciais(nome = '') {
   return ((partes[0]?.[0] ?? '') + (partes[1]?.[0] ?? '')).toUpperCase()
 }
 
+function escolherProxima(agendamentos) {
+  const agora = Date.now()
+  const futuras = agendamentos
+    .filter((a) => a.status === 'CONFIRMADA' && a.dataHora)
+    .filter((a) => new Date(a.dataHora).getTime() >= agora)
+    .sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora))
+  return futuras[0] ?? null
+}
+
 function Inicio() {
   const { usuario, sair } = useAuth()
   const navigate = useNavigate()
-  const consulta = proximaConsultaMock
+  const [proxima, setProxima] = useState(null)
+
+  useEffect(() => {
+    listarAgendamentos()
+      .then((lista) => setProxima(escolherProxima(lista)))
+      .catch(() => setProxima(null))
+  }, [])
+
+  // Sem agendamento novo, mantém o exemplo que já aparecia antes
+  const consulta = proxima ?? proximaConsultaMock
 
   function aoNavegar(item) {
     const rota = ROTAS_DA_BARRA[item]
