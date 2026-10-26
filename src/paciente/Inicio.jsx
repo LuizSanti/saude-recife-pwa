@@ -6,7 +6,7 @@ import {
   IconePrancheta,
   IconeRelogio,
   IconeSino,
-} from '../components/Icones'
+} from '../components/icones'
 import { useAuth } from '../hooks/useAuth'
 import lupaIcone from '../assets/lupaIcone.svg'
 import { proximaConsultaMock } from '../services/mocks/consultas'
