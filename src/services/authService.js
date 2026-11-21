@@ -1,7 +1,7 @@
 import { usuariosMock } from './mocks/usuarios'
+import { requisitarApi } from './apiService'
 
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
-const API_URL = import.meta.env.VITE_API_URL
+const USE_MOCK = import.meta.env.VITE_USE_MOCK !== 'false'
 
 const esperar = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -24,13 +24,26 @@ export async function login(email, senha) {
     }
   }
 
-  const resposta = await fetch(`${API_URL}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, senha }),
+  const dados = await requisitarApi('/auth/login', {
+    metodo: 'POST',
+    dados: { email, senha },
   })
-  if (!resposta.ok) throw new Error('E-mail ou senha incorretos')
-  return resposta.json()
+  if (typeof dados.token !== 'string' || typeof dados.tipoUsuario !== 'string') {
+    throw new Error(
+      'A resposta de login da API deve conter token e tipoUsuario.'
+    )
+  }
+  const tipoUsuario =
+    dados.tipoUsuario === 'ADMIN' ? 'ADMINISTRADOR' : dados.tipoUsuario
+  return {
+    token: dados.token,
+    usuario: {
+      ...dados.usuario,
+      nome: dados.usuario?.nome || email.split('@')[0],
+      email: dados.usuario?.email || email,
+      tipoUsuario,
+    },
+  }
 }
 
 export async function cadastrar(dados) {
@@ -44,11 +57,15 @@ export async function cadastrar(dados) {
     return { id: novo.id }
   }
 
-  const resposta = await fetch(`${API_URL}/auth/cadastro`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dados),
+  return requisitarApi('/auth/cadastro', {
+    metodo: 'POST',
+    dados: {
+      nome: dados.nome,
+      email: dados.email,
+      senha: dados.senha,
+      telefone: dados.telefone,
+      cpf: dados.cpf,
+      dataNascimento: dados.dataNascimento,
+    },
   })
-  if (!resposta.ok) throw new Error('Não foi possível criar a conta')
-  return resposta.json()
 }

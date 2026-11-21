@@ -1,0 +1,189 @@
+.buscar-clinica-especialidade {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 104px;
+  background: #f7f8f7;
+}
+
+.buscar-topo {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 106px;
+  padding: 16px 70px 0;
+  color: #ffffff;
+  background: var(--verde);
+  border-radius: 0 0 17px 17px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.18);
+}
+
+.buscar-topo h1 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.buscar-voltar {
+  position: absolute;
+  left: max(16px, calc((100% - 640px) / 2));
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  transform: translateY(-30%);
+  cursor: pointer;
+}
+
+.buscar-voltar img {
+  width: 20px;
+  height: 33px;
+}
+
+.buscar-conteudo {
+  width: min(100% - 36px, 640px);
+  margin: 24px auto 30px;
+}
+
+.buscar-campo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 0 16px;
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+}
+
+.buscar-campo img {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+
+.buscar-campo input {
+  width: 100%;
+  min-width: 0;
+  color: #111111;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-size: 16px;
+  outline: 0;
+}
+
+.buscar-secao {
+  margin-top: 26px;
+}
+
+.buscar-secao h2 {
+  margin-bottom: 12px;
+  color: #1d2739;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.buscar-secao ul {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.buscar-secao li {
+  min-width: 0;
+}
+
+.buscar-secao li button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 62px;
+  padding: 10px 16px;
+  color: #111111;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.buscar-secao li button span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.buscar-secao li button small {
+  flex: 0 1 auto;
+  color: #667085;
+  font-size: 13px;
+  text-align: right;
+}
+
+.buscar-secao li button:focus-visible,
+.buscar-voltar:focus-visible,
+.buscar-campo input:focus-visible {
+  outline: 3px solid var(--verde-escuro);
+  outline-offset: 3px;
+}
+
+.buscar-estado,
+.buscar-vazio {
+  margin-top: 18px;
+  color: #475576;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.buscar-estado {
+  text-align: center;
+}
+
+.buscar-estado button {
+  min-height: 46px;
+  margin-top: 12px;
+  padding: 0 18px;
+  color: #ffffff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+}
+
+.buscar-leitor-tela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.buscar-clinica-especialidade > .barra-navegacao {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  background: #ffffff;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.buscar-clinica-especialidade > .barra-navegacao .barra-navegacao-lista {
+  max-width: 640px;
+  margin: 0 auto;
+}
