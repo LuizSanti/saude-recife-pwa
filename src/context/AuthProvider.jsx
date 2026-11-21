@@ -2,11 +2,29 @@ import { useState } from 'react'
 import { AuthContext } from './AuthContext'
 import * as authService from '../services/authService'
 
+function carregarUsuario() {
+  const salvo = localStorage.getItem('usuario')
+  if (!salvo) return null
+
+  try {
+    const usuario = JSON.parse(salvo)
+    if (
+      !usuario ||
+      typeof usuario !== 'object' ||
+      typeof usuario.tipoUsuario !== 'string'
+    ) {
+      throw new Error('Dados de usuário inválidos')
+    }
+    return usuario
+  } catch {
+    localStorage.removeItem('usuario')
+    localStorage.removeItem('token')
+    return null
+  }
+}
+
 export function AuthProvider({ children }) {
-  const [usuario, setUsuario] = useState(() => {
-    const salvo = localStorage.getItem('usuario')
-    return salvo ? JSON.parse(salvo) : null
-  })
+  const [usuario, setUsuario] = useState(carregarUsuario)
 
   async function entrar(email, senha) {
     const dados = await authService.login(email, senha)

@@ -1,0 +1,47 @@
+.agendamento-confirmado {
+  display: grid;
+  min-height: 100vh;
+  min-height: 100dvh;
+  place-items: center;
+  padding: 24px;
+  background: #ffffff;
+}
+
+.agendamento-confirmado section {
+  display: grid;
+  width: min(100%, 430px);
+  gap: 14px;
+  padding: 28px 22px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.agendamento-confirmado h1 {
+  color: var(--verde-escuro);
+  font-size: 24px;
+}
+
+.agendamento-confirmado p {
+  font-size: 17px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.agendamento-confirmado button {
+  min-height: 50px;
+  padding: 10px 16px;
+  color: #ffffff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.agendamento-confirmado .agendamento-voltar-inicio {
+  color: var(--verde-escuro);
+  background: #ffffff;
+  border: 1px solid var(--verde);
+}

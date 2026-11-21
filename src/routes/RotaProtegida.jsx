@@ -10,7 +10,12 @@ function RotaProtegida({ perfis }) {
   }
 
   if (perfis && !perfis.includes(usuario.tipoUsuario)) {
-    return <Navigate to={AREA_POR_PERFIL[usuario.tipoUsuario]} replace />
+    return (
+      <Navigate
+        to={AREA_POR_PERFIL[usuario.tipoUsuario] || '/login'}
+        replace
+      />
+    )
   }
 
   return <Outlet />

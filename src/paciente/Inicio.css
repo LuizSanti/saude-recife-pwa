@@ -278,6 +278,26 @@
   color: var(--cinza-texto);
 }
 
+.inicio-consulta-erro {
+  display: grid;
+  gap: 12px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.inicio-consulta-erro button {
+  justify-self: start;
+  min-height: 44px;
+  padding: 8px 16px;
+  color: #ffffff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .inicio-sair {
   align-self: flex-start;
   padding: 8px 4px;

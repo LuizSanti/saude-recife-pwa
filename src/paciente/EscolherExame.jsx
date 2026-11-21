@@ -1,24 +1,46 @@
+import { useEffect, useState } from 'react'
 import TelaEscolha from '../components/TelaEscolha'
-
-const EXAMES_MOCK = [
-  { id: 1, nome: 'Antígeno Prostático Específico' },
-  { id: 2, nome: 'Avaliação Cardiológica' },
-  { id: 3, nome: 'Avaliação Oftalmológica' },
-  { id: 4, nome: 'Colonoscopia' },
-  { id: 5, nome: 'Glicemia de Jejum/Hemoglobina' },
-  { id: 6, nome: 'Hemograma Completo' },
-  { id: 7, nome: 'Mamografia' },
-]
+import { listarExames } from '../services/agendamentoService'
 
 function EscolherExame({ aoVoltar, aoSelecionar, aoNavegar }) {
+  const [exames, setExames] = useState([])
+  const [carregando, setCarregando] = useState(true)
+  const [erro, setErro] = useState('')
+  const [tentativa, setTentativa] = useState(0)
+
+  useEffect(() => {
+    let ativa = true
+
+    async function carregarExames() {
+      setCarregando(true)
+      setErro('')
+      try {
+        const resultado = await listarExames()
+        if (ativa) setExames(resultado.filter((exame) => exame.ativo))
+      } catch (error) {
+        if (ativa) setErro(error.message)
+      } finally {
+        if (ativa) setCarregando(false)
+      }
+    }
+
+    carregarExames()
+    return () => {
+      ativa = false
+    }
+  }, [tentativa])
+
   return (
     <TelaEscolha
       titulo="EXAMES"
-      subtitulo="Escolher o tipo de Exame"
+      subtitulo="Escolher o tipo de exame"
       etapaAtual={1}
-      opcoes={EXAMES_MOCK}
+      opcoes={exames}
       rotuloBusca="Pesquisar exame"
       mensagemVazia="Nenhum exame encontrado."
+      carregando={carregando}
+      erro={erro}
+      aoTentarNovamente={() => setTentativa((valor) => valor + 1)}
       aoVoltar={aoVoltar}
       aoSelecionar={aoSelecionar}
       aoNavegar={aoNavegar}
