@@ -58,21 +58,43 @@
   list-style: none;
 }
 
+.lista-opcoes-itens li + li {
+  margin-top: 12px;
+}
+
 .lista-opcoes-botao {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 16px;
   width: 100%;
-  min-height: 64px;
-  padding: 0 8px;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.4px;
+  min-height: 92px;
+  padding: 12px;
+  font-size: 19px;
+  font-weight: 600;
   text-align: left;
   color: var(--verde-escuro);
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--cinza-texto);
+  background: #ffffff;
+  border: 1px solid #dfe9e4;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0, 47, 15, 0.08);
   cursor: pointer;
   overflow-wrap: anywhere;
+}
+
+.lista-opcoes-conteudo {
+  display: grid;
+  gap: 3px;
+}
+
+.lista-opcoes-conteudo strong {
+  font-size: 1em;
+}
+
+.lista-opcoes-conteudo > span {
+  color: var(--cinza-texto);
+  font-size: 0.82em;
+  font-weight: 400;
+  line-height: 1.35;
 }
 
 .lista-opcoes-botao:active {
@@ -85,8 +107,8 @@
   }
 
   .lista-opcoes-botao {
-    min-height: 72px;
-    padding: 0 16px;
+    min-height: 104px;
+    padding: 16px;
     font-size: 22px;
   }
 

@@ -13,11 +13,6 @@ import lupaIcone from '../assets/lupaIcone.svg'
 import { listarConsultasComDetalhes } from '../services/agendamentoService'
 import './Inicio.css'
 
-const ROTAS_DA_BARRA = {
-  inicio: '/inicio',
-  consultas: '/consultas',
-}
-
 function doisPrimeirosNomes(nome = '') {
   return nome.trim().split(/\s+/).slice(0, 2).join(' ')
 }
@@ -54,8 +49,8 @@ function enderecoClinica(clinica) {
     .join(', ')
 }
 
-function Inicio() {
-  const { usuario, sair } = useAuth()
+function Inicio({ aoNavegar }) {
+  const { usuario } = useAuth()
   const navigate = useNavigate()
   const [consulta, setConsulta] = useState(null)
   const [carregandoConsulta, setCarregandoConsulta] = useState(true)
@@ -88,16 +83,6 @@ function Inicio() {
       ativa = false
     }
   }, [])
-
-  function aoNavegar(item) {
-    const rota = ROTAS_DA_BARRA[item]
-    if (rota) navigate(rota)
-  }
-
-  function aoSair() {
-    sair()
-    navigate('/login')
-  }
 
   return (
     <main className="inicio">
@@ -210,11 +195,6 @@ function Inicio() {
           <p className="inicio-vazio">Você ainda não tem consultas marcadas.</p>
         )}
       </section>
-
-      {/* Provisório: sai quando a tela de Perfil existir */}
-      <button type="button" className="inicio-sair" onClick={aoSair}>
-        Sair
-      </button>
 
       <BarraNavegacao itemAtivo="inicio" aoNavegar={aoNavegar} />
     </main>

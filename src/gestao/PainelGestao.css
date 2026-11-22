@@ -1,0 +1,353 @@
+.painel-gestao {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  background: #f5f8f6;
+}
+
+.painel-gestao-topo {
+  display: grid;
+  gap: 5px;
+  min-height: 150px;
+  padding: 22px max(20px, calc((100% - 680px) / 2));
+  color: #fff;
+  background: var(--verde);
+  border-radius: 0 0 20px 20px;
+}
+
+.painel-gestao-topo p {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.painel-gestao-topo h1 {
+  font-size: clamp(25px, 6vw, 32px);
+  line-height: 1.2;
+}
+
+.painel-gestao-topo span {
+  font-size: 15px;
+}
+
+.painel-gestao-conteudo {
+  display: grid;
+  gap: 16px;
+  width: min(100% - 32px, 680px);
+  margin: 22px auto 0;
+}
+
+.gestao-lista {
+  display: grid;
+  gap: 14px;
+}
+
+.gestao-card,
+.gestao-formulario {
+  display: grid;
+  gap: 13px;
+  padding: 18px;
+  color: #27332d;
+  background: #fff;
+  border: 1px solid #e5ebe7;
+  border-radius: 16px;
+  box-shadow: 0 3px 12px rgba(0, 47, 15, 0.06);
+}
+
+.gestao-card h3,
+.gestao-formulario h2 {
+  color: #103c28;
+  font-size: 18px;
+}
+
+.gestao-card p {
+  overflow-wrap: anywhere;
+  color: #52615a;
+  font-size: 15px;
+}
+
+.gestao-agendamento-cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.gestao-legenda {
+  color: #63716a;
+  font-size: 13px;
+}
+
+.gestao-status {
+  flex: 0 0 auto;
+  padding: 4px 10px;
+  color: #155d36;
+  background: #e2f5e9;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.gestao-status-cancelado {
+  color: #535b56;
+  background: #eceeed;
+}
+
+.gestao-status-realizado {
+  color: #174e76;
+  background: #e1f1fc;
+}
+
+.gestao-botao {
+  min-height: 48px;
+  padding: 9px 16px;
+  color: #fff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gestao-botao:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+.gestao-botao-secundario {
+  color: #9c2828;
+  background: #fff;
+  border: 1px solid #c44a4a;
+}
+
+.gestao-estado {
+  padding: 28px 12px;
+  color: #586760;
+  text-align: center;
+}
+
+.gestao-erro,
+.gestao-feedback-erro {
+  color: #a42626 !important;
+}
+
+.gestao-estado button {
+  min-height: 44px;
+  margin-top: 12px;
+  padding: 0 16px;
+  color: #fff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.gestao-feedback {
+  padding: 12px 14px;
+  color: #14532d;
+  background: #e7f6ec;
+  border-radius: 10px;
+}
+
+.gestao-resumos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.gestao-resumos article {
+  display: grid;
+  gap: 3px;
+  padding: 16px;
+  color: #476057;
+  background: #fff;
+  border: 1px solid #e3ebe5;
+  border-radius: 14px;
+}
+
+.gestao-resumos strong {
+  color: var(--verde-escuro);
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.gestao-subtitulo {
+  margin: 8px 0 0;
+  color: #103c28;
+  font-size: 20px;
+}
+
+.gestao-agenda-consultas {
+  display: grid;
+  gap: 14px;
+}
+
+.gestao-secao-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gestao-secao-cabecalho .gestao-subtitulo {
+  margin: 0;
+}
+
+.gestao-contagem-consultas {
+  display: grid;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: #fff;
+  background: var(--verde);
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.gestao-disponibilidades {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #dce7df;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0, 47, 15, 0.05);
+}
+
+.gestao-disponibilidades > summary {
+  display: flex;
+  min-height: 74px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  color: #103c28;
+  cursor: pointer;
+  list-style: none;
+}
+
+.gestao-disponibilidades > summary::-webkit-details-marker {
+  display: none;
+}
+
+.gestao-disponibilidades-titulo {
+  display: grid;
+  gap: 3px;
+}
+
+.gestao-disponibilidades-titulo strong {
+  font-size: 17px;
+}
+
+.gestao-disponibilidades-titulo small {
+  color: #63716a;
+  font-size: 14px;
+}
+
+.gestao-disponibilidades-indicador {
+  display: grid;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: var(--verde);
+  background: #e8f4ec;
+  border-radius: 50%;
+}
+
+.gestao-disponibilidades-indicador::before {
+  content: '+';
+  font-size: 24px;
+  line-height: 1;
+}
+
+.gestao-disponibilidades[open] > summary {
+  border-bottom: 1px solid #e5ebe7;
+}
+
+.gestao-disponibilidades[open] .gestao-disponibilidades-indicador::before {
+  content: '−';
+}
+
+.gestao-disponibilidades-conteudo {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+}
+
+.gestao-formulario label {
+  display: grid;
+  gap: 5px;
+  color: #384940;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.gestao-formulario-ajuda {
+  color: #52615a;
+  font-size: 14px;
+}
+
+.gestao-formulario input,
+.gestao-formulario textarea,
+.gestao-formulario select {
+  width: 100%;
+  min-height: 46px;
+  padding: 9px 11px;
+  color: #1d2922;
+  background: #fff;
+  border: 1px solid #bac8bf;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 400;
+}
+
+.gestao-formulario textarea {
+  resize: vertical;
+}
+
+.gestao-formulario-grade {
+  display: grid;
+  gap: 12px;
+}
+
+.gestao-paciente {
+  display: flex;
+  align-items: center;
+}
+
+.gestao-paciente > span {
+  display: grid;
+  flex: 0 0 48px;
+  height: 48px;
+  place-items: center;
+  color: #125c38;
+  background: #e1f2e8;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.gestao-perfil {
+  align-content: start;
+}
+
+.gestao-perfil > p {
+  color: #52615a;
+  overflow-wrap: anywhere;
+}
+
+.painel-gestao :focus-visible {
+  outline: 3px solid #e17a00;
+  outline-offset: 3px;
+}
+
+@media (min-width: 560px) {
+  .gestao-formulario-grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gestao-resumos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './ListaOpcoes.css'
 import lupaIcone from '../assets/lupaIcone.svg'
+import IlustracaoSaude from './IlustracaoSaude'
 
 function normalizar(texto) {
   return texto
@@ -47,7 +48,11 @@ function ListaOpcoes({ opcoes, aoSelecionar, rotulo = 'Pesquisar', mensagemVazia
               className="lista-opcoes-botao"
               onClick={() => aoSelecionar(opcao)}
             >
-              {opcao.nome}
+              <IlustracaoSaude nome={opcao.nome} />
+              <span className="lista-opcoes-conteudo">
+                <strong>{opcao.nome}</strong>
+                {opcao.descricao && <span>{opcao.descricao}</span>}
+              </span>
             </button>
           </li>
         ))}

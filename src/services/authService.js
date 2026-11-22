@@ -1,7 +1,7 @@
 import { usuariosMock } from './mocks/usuarios'
 import { requisitarApi } from './apiService'
 
-const USE_MOCK = import.meta.env.VITE_USE_MOCK !== 'false'
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
 
 const esperar = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 

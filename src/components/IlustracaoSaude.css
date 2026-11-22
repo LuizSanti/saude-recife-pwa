@@ -1,0 +1,65 @@
+.ilustracao-saude {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  place-items: center;
+  color: #008f5a;
+  background: #e2f5ee;
+  border-radius: 18px;
+}
+
+.ilustracao-saude svg {
+  width: 46px;
+  height: 46px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.4;
+}
+
+.ilustracao-saude-cardiologia {
+  color: #c62828;
+  background: #ffe8e5;
+}
+
+.ilustracao-saude-neurologia,
+.ilustracao-saude-geriatria {
+  color: #6a45a4;
+  background: #f0e9fb;
+}
+
+.ilustracao-saude-ortopedia {
+  color: #9a5a00;
+  background: #fff1d8;
+}
+
+.ilustracao-saude-fisioterapia {
+  color: #087c8c;
+  background: #e0f5f6;
+}
+
+.ilustracao-saude-endocrinologia,
+.ilustracao-saude-exame {
+  color: #1762a5;
+  background: #e5f0ff;
+}
+
+.ilustracao-saude-oftalmologia {
+  color: #24784c;
+  background: #e2f5e8;
+}
+
+@media (min-width: 768px) {
+  .ilustracao-saude {
+    width: 72px;
+    height: 72px;
+    flex-basis: 72px;
+  }
+
+  .ilustracao-saude svg {
+    width: 52px;
+    height: 52px;
+  }
+}
