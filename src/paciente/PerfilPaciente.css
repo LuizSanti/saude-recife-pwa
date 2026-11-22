@@ -1,0 +1,139 @@
+.perfil-paciente {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 640px);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding-bottom: 105px;
+  background: #f7f8f7;
+}
+
+.perfil-paciente-topo {
+  padding: 28px 24px 24px;
+  color: #fff;
+  background: var(--verde);
+  border-radius: 0 0 18px 18px;
+}
+
+.perfil-paciente-topo h1 {
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.perfil-paciente-topo p {
+  margin-top: 6px;
+  font-size: 16px;
+}
+
+.perfil-paciente-conteudo {
+  display: grid;
+  gap: 16px;
+  padding: 22px 18px;
+}
+
+.perfil-paciente-formulario {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e1e8e3;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0, 47, 15, 0.06);
+}
+
+.perfil-paciente-formulario label {
+  display: grid;
+  gap: 6px;
+  color: #263d30;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.perfil-paciente-formulario input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  color: #17231b;
+  background: #fff;
+  border: 1px solid #aebdb3;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 400;
+}
+
+.perfil-paciente-formulario input:read-only {
+  color: #59665e;
+  background: #f1f4f2;
+}
+
+.perfil-paciente-formulario small {
+  color: #59665e;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.perfil-paciente-botao,
+.perfil-paciente-erro button {
+  min-height: 50px;
+  padding: 10px 16px;
+  color: #fff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 9px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.perfil-paciente-botao:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+.perfil-paciente-sair {
+  min-height: 48px;
+  color: #a32727;
+  background: #fff;
+  border: 1px solid #b84242;
+  border-radius: 9px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.perfil-paciente-aviso,
+.perfil-paciente-erro {
+  padding: 12px 14px;
+  border-radius: 9px;
+}
+
+.perfil-paciente-aviso {
+  color: #14532d;
+  background: #e7f6ec;
+}
+
+.perfil-paciente-erro {
+  display: grid;
+  gap: 10px;
+  color: #a42626;
+  background: #fff0ef;
+}
+
+.perfil-paciente-estado {
+  padding: 28px 12px;
+  color: #586760;
+  text-align: center;
+}
+
+.perfil-paciente :focus-visible {
+  outline: 3px solid #e17a00;
+  outline-offset: 3px;
+}
+
+@media (min-width: 560px) {
+  .perfil-paciente-conteudo {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}

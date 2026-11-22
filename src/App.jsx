@@ -3,9 +3,9 @@ import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-
 import Login from './auth/Login'
 import Cadastro from './auth/Cadastro'
 import Inicio from './paciente/Inicio'
+import PerfilPaciente from './paciente/PerfilPaciente'
 import BuscarClinicaEspecialidade from './paciente/BuscarClinicaEspecialidade'
-import InicioMedico from './medico/InicioMedico'
-import InicioAdmin from './adm/InicioAdmin'
+import PainelGestao from './gestao/PainelGestao'
 import EscolherEspecialidade from './paciente/EscolherEspecialidade'
 import EscolherExame from './paciente/EscolherExame'
 import EscolherUnidade from './paciente/EscolherUnidade'
@@ -35,6 +35,7 @@ function App() {
   function navegarPelaBarra(item) {
     if (item === 'inicio') navigate('/inicio')
     if (item === 'consultas') navigate('/consultas')
+    if (item === 'perfil') navigate('/perfil')
   }
 
   return (
@@ -43,7 +44,11 @@ function App() {
       <Route path="/cadastro" element={<Cadastro />} />
 
       <Route element={<RotaProtegida perfis={['PACIENTE']} />}>
-        <Route path="/inicio" element={<Inicio />} />
+        <Route path="/inicio" element={<Inicio aoNavegar={navegarPelaBarra} />} />
+        <Route
+          path="/perfil"
+          element={<PerfilPaciente aoNavegar={navegarPelaBarra} />}
+        />
         <Route
           path="/buscar"
           element={
@@ -201,11 +206,11 @@ function App() {
       </Route>
 
       <Route element={<RotaProtegida perfis={['PROFISSIONAL']} />}>
-        <Route path="/profissional" element={<InicioMedico />} />
+        <Route path="/profissional/*" element={<PainelGestao perfil="profissional" />} />
       </Route>
 
       <Route element={<RotaProtegida perfis={['ADMINISTRADOR']} />}>
-        <Route path="/admin" element={<InicioAdmin />} />
+        <Route path="/admin/*" element={<PainelGestao perfil="admin" />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/login" replace />} />

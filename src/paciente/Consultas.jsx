@@ -188,6 +188,7 @@ function Consultas({ aoNavegar }) {
           <div className="consultas-lista">
             {filtradas.map((item) => {
               const cancelada = item.status === 'CANCELADO'
+              const realizada = item.status === 'REALIZADO'
               const profissional = item.profissional
               const clinica = item.clinica
               const endereco = clinica ? enderecoClinica(clinica) : ''
@@ -225,10 +226,16 @@ function Consultas({ aoNavegar }) {
                         className={
                           cancelada
                             ? 'consulta-status consulta-status-cancelada'
-                            : 'consulta-status'
+                            : realizada
+                              ? 'consulta-status consulta-status-realizada'
+                              : 'consulta-status'
                         }
                       >
-                        {cancelada ? 'CANCELADA' : 'CONFIRMADA'}
+                        {cancelada
+                          ? 'CANCELADA'
+                          : realizada
+                            ? 'REALIZADA'
+                            : 'CONFIRMADA'}
                       </span>
                       <p>
                         {formatarData(item.inicio, {

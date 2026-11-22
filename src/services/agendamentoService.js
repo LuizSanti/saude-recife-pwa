@@ -10,7 +10,7 @@ import {
   cancelarAgendamentoMock,
 } from './mocks/consultas'
 
-const USE_MOCK = import.meta.env.VITE_USE_MOCK !== 'false'
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
 const agendamentosExameMock = []
 
 function horarioFuturo(data, horaInicio) {

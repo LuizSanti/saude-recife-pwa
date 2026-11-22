@@ -193,6 +193,11 @@
   background: #eeeeee;
 }
 
+.consulta-status-realizada {
+  color: #174e76;
+  background: #e1f1fc;
+}
+
 .consulta-card-profissional {
   display: flex;
   align-items: center;

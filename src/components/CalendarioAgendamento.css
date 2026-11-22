@@ -15,38 +15,43 @@
 }
 
 .calendario-agendamento-topo {
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
   min-height: 64px;
-  padding: 8px 48px;
+  padding: 8px 12px;
 }
 
 .calendario-agendamento-topo h1 {
+  flex: 1;
+  min-width: 0;
   font-size: 19px;
   font-weight: 700;
   text-align: center;
 }
 
 .calendario-agendamento-voltar {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 40px;
-  padding: 4px;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 72px;
+  min-height: 44px;
+  padding: 4px 2px;
+  color: var(--verde-escuro);
   background: transparent;
   border: 0;
-  transform: translateY(-50%);
   cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .calendario-agendamento-voltar img {
-  width: 18px;
-  height: 30px;
+  width: 14px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(2682%) hue-rotate(95deg) brightness(93%) contrast(101%);
 }
 
 .calendario-agendamento-conteudo {

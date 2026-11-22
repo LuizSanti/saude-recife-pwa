@@ -93,6 +93,7 @@ function CalendarioAgendamento({
           aria-label="Voltar"
         >
           <img src={voltaIcone} alt="" />
+          <span>Voltar</span>
         </button>
         <h1>{titulo}</h1>
       </header>
