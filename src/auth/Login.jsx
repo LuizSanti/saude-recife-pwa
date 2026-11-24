@@ -35,9 +35,17 @@ function Login() {
     setCarregando(true)
     try {
       const logado = await entrar(email.trim(), senha)
-      navigate(AREA_POR_PERFIL[logado.tipoUsuario])
+      const destino = logado && AREA_POR_PERFIL[logado.tipoUsuario]
+      if (!destino) {
+        throw new Error('Não foi possível identificar o perfil deste usuário.')
+      }
+      navigate(destino)
     } catch (err) {
-      setErroGeral(err.message)
+      setErroGeral(
+        err instanceof Error
+          ? err.message
+          : 'Não foi possível entrar. Tente novamente.'
+      )
     } finally {
       setCarregando(false)
     }

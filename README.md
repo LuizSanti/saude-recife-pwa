@@ -302,7 +302,7 @@ Com `VITE_USE_MOCK=false`, `src/services/authService.js` e `src/services/agendam
 
 | Função | Requisição | Corpo | Resposta esperada |
 |---|---|---|---|
-| `login(email, senha)` | `POST {VITE_API_URL}/auth/login` | `{ email, senha }` | `{ token, tipoUsuario }` |
+| `login(email, senha)` | `POST {VITE_API_URL}/auth/login` | `{ email, senha }` | `{ token, tipoUsuario }` ou `{ token, usuario: { tipoUsuario, ... } }` |
 | `cadastrar(dados)` | `POST {VITE_API_URL}/auth/cadastro` | `{ nome, email, senha, telefone, cpf, dataNascimento }` | dados do usuário criado |
 | especialidades | `GET {VITE_API_URL}/especialidades` | — | lista de especialidades ativas |
 | unidades e profissionais | `GET {VITE_API_URL}/clinicas`, `GET {VITE_API_URL}/profissionais` | — | listas de unidades e profissionais |

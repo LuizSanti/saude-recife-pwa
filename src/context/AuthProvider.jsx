@@ -28,6 +28,17 @@ export function AuthProvider({ children }) {
 
   async function entrar(email, senha) {
     const dados = await authService.login(email, senha)
+    if (
+      !dados ||
+      typeof dados.token !== 'string' ||
+      !dados.usuario ||
+      typeof dados.usuario !== 'object' ||
+      Array.isArray(dados.usuario) ||
+      typeof dados.usuario.tipoUsuario !== 'string'
+    ) {
+      throw new Error('A resposta de login não contém um usuário válido.')
+    }
+
     localStorage.setItem('token', dados.token)
     localStorage.setItem('usuario', JSON.stringify(dados.usuario))
     setUsuario(dados.usuario)
