@@ -28,20 +28,36 @@ export async function login(email, senha) {
     metodo: 'POST',
     dados: { email, senha },
   })
-  if (typeof dados.token !== 'string' || typeof dados.tipoUsuario !== 'string') {
+  if (!dados || typeof dados !== 'object' || Array.isArray(dados)) {
+    throw new Error(
+      'A resposta de login da API está inválida.'
+    )
+  }
+  const usuarioApi = dados.usuario ?? {}
+  if (
+    typeof usuarioApi !== 'object' ||
+    Array.isArray(usuarioApi)
+  ) {
+    throw new Error('Os dados do usuário retornados pela API estão inválidos.')
+  }
+  const tipoUsuario =
+    typeof dados.tipoUsuario === 'string'
+      ? dados.tipoUsuario
+      : usuarioApi.tipoUsuario
+  if (typeof dados.token !== 'string' || typeof tipoUsuario !== 'string') {
     throw new Error(
       'A resposta de login da API deve conter token e tipoUsuario.'
     )
   }
-  const tipoUsuario =
-    dados.tipoUsuario === 'ADMIN' ? 'ADMINISTRADOR' : dados.tipoUsuario
+  const perfil =
+    tipoUsuario === 'ADMIN' ? 'ADMINISTRADOR' : tipoUsuario
   return {
     token: dados.token,
     usuario: {
-      ...dados.usuario,
-      nome: dados.usuario?.nome || email.split('@')[0],
-      email: dados.usuario?.email || email,
-      tipoUsuario,
+      ...usuarioApi,
+      nome: usuarioApi.nome || email.split('@')[0],
+      email: usuarioApi.email || email,
+      tipoUsuario: perfil,
     },
   }
 }
