@@ -1,0 +1,309 @@
+.consultas {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 104px;
+  background: #f7f8f7;
+}
+
+.consultas-topo {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 106px;
+  padding: 16px 70px 0;
+  color: #ffffff;
+  background: var(--verde);
+  border-radius: 0 0 17px 17px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.18);
+}
+
+.consultas-topo h1 {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.consultas-voltar {
+  position: absolute;
+  left: max(16px, calc((100% - 640px) / 2));
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  transform: translateY(-30%);
+  cursor: pointer;
+}
+
+.consultas-voltar img {
+  width: 20px;
+  height: 33px;
+}
+
+.consultas-conteudo {
+  width: min(100% - 36px, 640px);
+  margin: 24px auto 0;
+}
+
+.consultas-busca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 54px;
+  padding: 0 16px;
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+}
+
+.consultas-busca svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: #667085;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.consultas-busca input {
+  width: 100%;
+  min-width: 0;
+  color: #111111;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-size: 16px;
+  outline: 0;
+}
+
+.consultas-estado {
+  margin: 32px 0;
+  color: #475576;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.consultas-estado button {
+  min-height: 46px;
+  margin-top: 12px;
+  padding: 0 18px;
+  color: #ffffff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.consultas-erro {
+  margin: 14px 0;
+  color: #b42318;
+  font-size: 14px;
+}
+
+.consultas-lista {
+  display: grid;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.consulta-card {
+  position: relative;
+  display: grid;
+  gap: 17px;
+  overflow: hidden;
+  padding: 19px 18px 18px 26px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.consulta-card-borda {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  background: var(--verde);
+}
+
+.consulta-card-borda-cancelada {
+  background: #929292;
+}
+
+.consulta-card-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.consulta-card-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 50px;
+  color: var(--verde-escuro);
+  text-transform: uppercase;
+}
+
+.consulta-card-data span {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.consulta-card-data strong {
+  color: #111111;
+  font-size: 27px;
+  line-height: 1.1;
+}
+
+.consulta-card-titulo {
+  display: grid;
+  justify-items: start;
+  gap: 7px;
+  min-width: 0;
+}
+
+.consulta-card-titulo > p {
+  color: #475576;
+  font-size: 15px;
+}
+
+.consulta-status {
+  padding: 4px 10px;
+  color: #166534;
+  background: #dcfce7;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.consulta-status-cancelada {
+  color: #595959;
+  background: #eeeeee;
+}
+
+.consulta-status-realizada {
+  color: #174e76;
+  background: #e1f1fc;
+}
+
+.consulta-card-profissional {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.consulta-avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 48px;
+  height: 48px;
+  color: var(--verde-escuro);
+  background: var(--verde-claro);
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.consulta-card-profissional h2 {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.consulta-card-profissional p {
+  margin-top: 3px;
+  color: #475576;
+  font-size: 14px;
+}
+
+.consulta-card-profissional p:first-of-type {
+  color: var(--verde-escuro);
+  font-weight: 700;
+}
+
+.consulta-card-detalhes {
+  display: grid;
+  gap: 8px;
+  color: #475576;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.consulta-card-detalhes strong {
+  color: #222222;
+}
+
+.consulta-cancelar {
+  width: 100%;
+  min-height: 48px;
+  color: #b42318;
+  background: #ffffff;
+  border: 1px solid #b42318;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.consulta-cancelar:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.consultas button:focus-visible,
+.consultas input:focus-visible {
+  outline: 3px solid var(--verde-escuro);
+  outline-offset: 3px;
+}
+
+.consultas > .barra-navegacao {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  background: #ffffff;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.consultas > .barra-navegacao .barra-navegacao-lista {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@media (min-width: 768px) {
+  .consultas-topo {
+    min-height: 120px;
+  }
+
+  .consultas-conteudo {
+    margin-top: 32px;
+  }
+
+  .consulta-card {
+    padding: 22px 24px 22px 32px;
+  }
+}

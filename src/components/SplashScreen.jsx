@@ -4,7 +4,7 @@ import './SplashScreen.css'
 
 function SplashScreen({
   title = 'Saúde Sênior',
-  appName = 'Saúde Recife',
+  appName = 'Saúde Sênior',
   onContinue,
   autoAdvanceMs = 0,
   showContinueButton = false,

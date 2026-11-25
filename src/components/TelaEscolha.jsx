@@ -12,6 +12,9 @@ function TelaEscolha({
   opcoes,
   rotuloBusca,
   mensagemVazia,
+  carregando = false,
+  erro = '',
+  aoTentarNovamente,
   aoVoltar,
   aoSelecionar,
   aoNavegar,
@@ -53,7 +56,20 @@ function TelaEscolha({
         ))}
       </div>
 
-      {children ?? (
+      {carregando ? (
+        <p className="tela-escolha-estado" role="status">
+          Carregando opções...
+        </p>
+      ) : erro ? (
+        <div className="tela-escolha-estado" role="alert">
+          <p>{erro}</p>
+          {aoTentarNovamente && (
+            <button type="button" onClick={aoTentarNovamente}>
+              Tentar novamente
+            </button>
+          )}
+        </div>
+      ) : children ?? (
         <ListaOpcoes
           opcoes={opcoes}
           aoSelecionar={aoSelecionar}

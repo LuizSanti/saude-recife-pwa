@@ -92,6 +92,26 @@
   background: var(--verde);
 }
 
+.tela-escolha-estado {
+  margin: 24px var(--margem-tela);
+  font-size: 1.125rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.tela-escolha-estado button {
+  min-height: 48px;
+  margin-top: 16px;
+  padding: 8px 20px;
+  color: #ffffff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 @media (min-width: 768px) {
   .tela-escolha-topo {
     padding: 24px max(24px, calc((100% - var(--largura-conteudo)) / 2)) 0;

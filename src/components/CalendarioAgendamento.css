@@ -1,0 +1,256 @@
+.calendario-agendamento {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: env(safe-area-inset-top) 0 calc(110px + env(safe-area-inset-bottom));
+  color: #080808;
+  background: #ffffff;
+}
+
+.calendario-agendamento button:focus-visible {
+  outline: 3px solid var(--verde-escuro);
+  outline-offset: 3px;
+}
+
+.calendario-agendamento-topo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 64px;
+  padding: 8px 12px;
+}
+
+.calendario-agendamento-topo h1 {
+  flex: 1;
+  min-width: 0;
+  font-size: 19px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.calendario-agendamento-voltar {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 72px;
+  min-height: 44px;
+  padding: 4px 2px;
+  color: var(--verde-escuro);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.calendario-agendamento-voltar img {
+  width: 14px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(2682%) hue-rotate(95deg) brightness(93%) contrast(101%);
+}
+
+.calendario-agendamento-conteudo {
+  padding: 0 19px;
+}
+
+.calendario-agendamento-mes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  margin-top: 8px;
+}
+
+.calendario-agendamento-mes p {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  margin: 0 16px;
+  font-size: 16px;
+}
+
+.calendario-agendamento-mes p span {
+  text-transform: capitalize;
+}
+
+.calendario-agendamento-mes strong {
+  color: var(--verde);
+  font-size: 18px;
+}
+
+.calendario-agendamento-mes button {
+  width: 28px;
+  height: 34px;
+  padding: 0;
+  color: var(--verde-escuro);
+  background: transparent;
+  border: 0;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.calendario-agendamento-mes button:disabled {
+  color: #b7b7b7;
+  cursor: default;
+}
+
+.calendario-agendamento-grade {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  justify-items: center;
+  row-gap: 2px;
+  margin-top: 4px;
+}
+
+.calendario-agendamento-dia-semana,
+.calendario-agendamento-dia {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 34px;
+  font-size: 16px;
+}
+
+.calendario-agendamento-dia-semana {
+  font-weight: 500;
+}
+
+.calendario-agendamento-dia {
+  padding: 0;
+  color: #111111;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.calendario-agendamento-dia-fora,
+.calendario-agendamento-dia:disabled {
+  color: #888888;
+  cursor: default;
+}
+
+.calendario-agendamento-dia-selecionado {
+  color: #ffffff;
+  background: var(--verde);
+}
+
+.calendario-agendamento-horarios {
+  margin-top: 35px;
+}
+
+.calendario-agendamento-horarios h2 {
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.calendario-agendamento-opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.calendario-agendamento-horario {
+  min-width: 81px;
+  min-height: 52px;
+  padding: 0 16px;
+  color: #111111;
+  background: #f1f1f1;
+  border: 0;
+  border-radius: 9px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.calendario-agendamento-horario-selecionado {
+  color: #ffffff;
+  background: var(--verde);
+}
+
+.calendario-agendamento-mensagem {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.calendario-agendamento-aviso {
+  margin: 0 19px 12px;
+  padding: 10px 12px;
+  color: #7a4d00;
+  background: #fff4d6;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.calendario-agendamento-mensagem button {
+  min-height: 44px;
+  margin-top: 8px;
+  padding: 0 16px;
+  color: #ffffff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.calendario-agendamento-erro {
+  margin-top: 12px;
+  color: #b42318;
+  font-size: 14px;
+}
+
+.calendario-agendamento-rodape {
+  position: fixed;
+  left: 50%;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 5;
+  width: min(100% - 38px, 392px);
+  transform: translateX(-50%);
+}
+
+.calendario-agendamento-rodape button {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 18px;
+  color: #ffffff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.calendario-agendamento-rodape button:disabled {
+  background: #a7a7a7;
+  cursor: not-allowed;
+}
+
+@media (min-width: 600px) {
+  .calendario-agendamento {
+    max-width: 560px;
+  }
+
+  .calendario-agendamento-conteudo {
+    padding: 0 28px;
+  }
+
+  .calendario-agendamento-aviso {
+    margin-right: 28px;
+    margin-left: 28px;
+  }
+
+  .calendario-agendamento-dia-semana,
+  .calendario-agendamento-dia {
+    width: 44px;
+    height: 40px;
+  }
+}

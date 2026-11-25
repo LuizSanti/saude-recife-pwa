@@ -1,6 +1,6 @@
 # Saúde Sênior — Frontend (PWA)
 
-> Repositório: `saude-recife-pwa` · Projeto Integrador "Saúde na Palma da Mão" (referenciado como "Saúde Recife" no material do professor)
+> Repositório: `saude-recife-pwa` · Projeto Integrador "Saúde na Palma da Mão" (referenciado como "Saúde Sênior" no material do professor)
 
 Progressive Web App de **pré-triagem e agendamento de consultas** em clínicas parceiras do Recife, pensado para o **público idoso (60+ anos)**: poucos toques por fluxo, fontes grandes, alto contraste e linguagem clara.
 
@@ -38,15 +38,17 @@ Repositório irmão: `saude-palma-backend` (API REST).
 | Área | Situação |
 |---|---|
 | Splash, Login e Cadastro | Funcionando (com máscaras, validação e mensagens em português) |
-| Autenticação com rotas protegidas por perfil | Funcionando (com dados mockados) |
-| Home do paciente | Funcionando (dados mockados) |
-| Telas de escolha (Especialidade, Exame, Unidade, Profissional) | Telas prontas; **ainda não estão ligadas entre si** |
-| Consultas e Perfil (barra de navegação) | Ainda sem tela |
-| Área do profissional e do administrador | Placeholders (nome + botão Sair) |
-| PWA (manifest, service worker, ícones) | Configurado com `vite-plugin-pwa` (SCRUM-23); build gera `sw.js` com 68 arquivos em cache |
+| Autenticação com rotas protegidas por perfil | Mock ou API real, conforme `VITE_USE_MOCK` |
+| Home do paciente | Consulta futura carregada da API; suporta dados mockados |
+| Fluxo de consulta (Especialidade, Unidade e horário) | Ligado à API; confirmação exige horários cadastrados no backend |
+| Fluxo de exames | Catálogo, horários e confirmação ligados à API; requer as tabelas de exame |
+| Consultas | Lista consultas do paciente, busca e cancelamento |
+| Perfil do paciente | Leitura e edição de nome e telefone pela API |
+| Área do profissional e do administrador | Painéis com agenda, pacientes, histórico, perfil e saída da conta; gestão de clínicas, equipe e áreas |
+| PWA (manifest, service worker, ícones) | Configurado com `vite-plugin-pwa`; build gera manifest, `sw.js` e cache de arquivos estáticos |
 | Build de produção | Passando (import de ícones corrigido em 26/10) |
-| Login do administrador | **Com bug**: ver [Problemas conhecidos](#14-problemas-conhecidos) |
-| Integração com a API real | Preparada em `authService.js`; desligada por `VITE_USE_MOCK=true` |
+| Login do administrador | Redirecionamento por perfil configurado |
+| Integração com a API real | Login, cadastro, agendamento, consultas, perfil e painéis; `VITE_USE_MOCK=false` |
 
 ---
 
@@ -117,10 +119,14 @@ Depois abra o DevTools do navegador em **Application** e confira **Manifest** e 
 
 | Variável | Descrição | Exemplo |
 |---|---|---|
-| `VITE_API_URL` | URL base da API backend | `http://localhost:8080` |
-| `VITE_USE_MOCK` | `true` usa os dados mockados; qualquer outro valor chama a API | `true` |
+| `VITE_API_URL` | URL base da API; no desenvolvimento, `/api` usa o proxy para `http://localhost:8080` | `/api` |
+| `VITE_USE_MOCK` | `true` usa os dados mockados; `false` chama a API | `true` |
 
 O Vite só expõe ao navegador variáveis que começam com `VITE_`. Nunca commite arquivos `.env` reais: use o `.env.example` como referência.
+
+Para usar o backend local, configure `VITE_USE_MOCK=false` e `VITE_API_URL=/api` no `.env`, inicie o backend na porta `8080` com o PostgreSQL configurado e reinicie o Vite. O proxy evita uma chamada cross-origin do navegador.
+
+Em produção, o proxy do Vite não existe: configure `VITE_API_URL` com a URL pública da API e permita essa origem no backend, ou configure o servidor de hospedagem para encaminhar `/api` ao backend.
 
 ---
 
@@ -138,8 +144,7 @@ saude-recife-pwa/
 │   ├── assets/                 # Logos, fotos e ícones SVG
 │   ├── auth/                   # Login e Cadastro (+ CSS)
 │   ├── paciente/               # Home e telas de escolha do paciente
-│   ├── medico/                 # Área do profissional (placeholder)
-│   ├── adm/                    # Área do administrador (placeholder)
+│   ├── gestao/                 # Painéis do profissional e do administrador
 │   ├── components/             # Componentes reutilizáveis
 │   ├── context/                # AuthContext e AuthProvider
 │   ├── hooks/                  # useAuth
@@ -170,12 +175,16 @@ O app tem três perfis: `PACIENTE`, `PROFISSIONAL` e `ADMINISTRADOR`. Qualquer r
 | `/login` | Login | Público |
 | `/cadastro` | Cadastro de paciente | Público |
 | `/inicio` | Home do paciente | `PACIENTE` |
+| `/perfil` | Perfil do paciente | `PACIENTE` |
+| `/buscar` | Buscar clínicas e especialidades | `PACIENTE` |
 | `/especialidade` | Escolher especialidade | `PACIENTE` |
 | `/exames` | Escolher exame | `PACIENTE` |
 | `/unidade` | Escolher unidade | `PACIENTE` |
 | `/escolher-profissional` | Escolher profissional | `PACIENTE` |
-| `/profissional` | Início do profissional (placeholder) | `PROFISSIONAL` |
-| `/admin` | Início do administrador (placeholder) | `ADMINISTRADOR` |
+| `/horario-exame` | Escolher data/horário e confirmar exame | `PACIENTE` |
+| `/consultas` | Consultas agendadas e cancelamento | `PACIENTE` |
+| `/profissional/*` | Pacientes, agenda, histórico e perfil profissional | `PROFISSIONAL` |
+| `/admin/*` | Início, clínicas, equipe, áreas e perfil administrativo | `ADMINISTRADOR` |
 
 A splash aparece por 3 segundos ao abrir o app (timer fixo em `App.jsx`).
 
@@ -208,8 +217,9 @@ Observações:
 
 - No mock, um usuário criado pelo Cadastro fica **apenas em memória** e some ao recarregar a página.
 - O token do mock é falso (`'token-falso-' + id`).
-- Os cartões de próxima consulta vêm de `src/services/mocks/consultas.js`.
-- As listas de especialidades, exames, unidades e profissionais são constantes `*_MOCK` dentro de cada tela `Escolher*`.
+- Os agendamentos de demonstração ficam em `src/services/mocks/consultas.js`; a Home mostra a próxima consulta confirmada em vez de um cartão estático.
+- O fluxo de consulta e de exame usa horários e códigos `DEMO`; nada é persistido no backend.
+- Catálogo, clínicas e profissionais ficam em `src/services/mocks/agendamento.js`.
 
 ---
 
@@ -223,10 +233,13 @@ Observações:
 
 ### Área do paciente
 
-- **Inicio (Home)**: avatar com iniciais, saudação com os dois primeiros nomes, busca, atalhos grandes (Marcar Consulta e Marcar Exame), área de Triagem com IA (apenas visual) e cartão da próxima consulta com renderização condicional.
+- **Inicio (Home)**: avatar com iniciais, saudação com os dois primeiros nomes, atalhos, busca de clínicas/especialidades, triagem visual e cartão da próxima consulta confirmada carregada da API.
+- **BuscarClinicaEspecialidade**: pesquisa combinada de clínicas e especialidades com navegação para o fluxo de agendamento correspondente.
 - **TelaEscolha**: esqueleto das telas de escolha (botão voltar, título, subtítulo, indicador de 3 etapas com `role="progressbar"`, conteúdo e barra de navegação). Renderiza `children` ou, se não houver, uma `ListaOpcoes`.
-- **EscolherEspecialidade / EscolherExame / EscolherUnidade**: passam uma lista mock e textos para a `TelaEscolha`.
-- **EscolherProfissional**: usa `children` para listar `CartaoProfissional`.
+- **EscolherEspecialidade / EscolherUnidade**: carregam dados ativos da API e exibem carregamento, erro e nova tentativa.
+- **EscolherProfissional**: calendário, horários da API e confirmação da consulta.
+- **EscolherExame / EscolherExameHorario**: catálogo, disponibilidade por exame e confirmação separada de consulta.
+- **Consultas**: busca e lista os agendamentos do paciente, combina informações de profissionais, clínicas e especialidades e permite cancelar consultas futuras.
 
 ### Componentes compartilhados (`src/components/`)
 
@@ -285,20 +298,37 @@ O build gera `manifest.webmanifest`, `sw.js` e `registerSW.js`. Depois da primei
 
 ## 12. Integração com a API
 
-Com `VITE_USE_MOCK` diferente de `true`, `src/services/authService.js` usa `VITE_API_URL`:
+Com `VITE_USE_MOCK=false`, `src/services/authService.js` e `src/services/agendamentoService.js` usam `VITE_API_URL`:
 
 | Função | Requisição | Corpo | Resposta esperada |
 |---|---|---|---|
-| `login(email, senha)` | `POST {VITE_API_URL}/auth/login` | `{ email, senha }` | `{ token, usuario: { id, nome, email, tipoUsuario } }` |
-| `cadastrar(dados)` | `POST {VITE_API_URL}/auth/cadastro` | dados do formulário (CPF e telefone só com dígitos, data em ISO) | `{ id }` |
+| `login(email, senha)` | `POST {VITE_API_URL}/auth/login` | `{ email, senha }` | `{ token, tipoUsuario }` ou `{ token, usuario: { tipoUsuario, ... } }` |
+| `cadastrar(dados)` | `POST {VITE_API_URL}/auth/cadastro` | `{ nome, email, senha, telefone, cpf, dataNascimento }` | dados do usuário criado |
+| especialidades | `GET {VITE_API_URL}/especialidades` | — | lista de especialidades ativas |
+| unidades e profissionais | `GET {VITE_API_URL}/clinicas`, `GET {VITE_API_URL}/profissionais` | — | listas de unidades e profissionais |
+| horários | `GET {VITE_API_URL}/disponibilidades?data=AAAA-MM-DD&clinicaId=...&especialidadeId=...` | — | horários disponíveis |
+| confirmar consulta | `POST {VITE_API_URL}/agendamentos` | `{ disponibilidadeId }` | consulta confirmada e código |
+| minhas consultas | `GET {VITE_API_URL}/agendamentos/me` | — | consultas do paciente autenticado |
+| cancelar consulta | `PATCH {VITE_API_URL}/agendamentos/{id}/cancelar` | — | consulta atualizada |
+| catálogo de exames | `GET {VITE_API_URL}/exames` | — | exames ativos |
+| horários de exame | `GET {VITE_API_URL}/disponibilidades-exame?data=AAAA-MM-DD&clinicaId=...&exameId=...` | — | horários disponíveis |
+| confirmar exame | `POST {VITE_API_URL}/agendamentos-exame` | `{ disponibilidadeId }` | exame confirmado e código |
 
-`tipoUsuario` deve ser `PACIENTE`, `PROFISSIONAL` ou `ADMINISTRADOR`. Alinhe o formato com o time de backend; as telas não mudam quando o backend ficar pronto, só o `authService`.
+O endpoint de horários omite disponibilidades que conflitam com consultas confirmadas e que não correspondem aos vínculos ativos de profissional, clínica e especialidade. Se outro usuário ocupar o horário entre a listagem e a confirmação, a API responde com `409 Conflict` e o front atualiza a lista.
 
-Para trocar os mocks das telas de escolha pela API: criar services com `fetch` (como o `authService`) e carregar as listas em um `useEffect` com estados de carregamento e erro.
+O backend precisa ter o schema de exames aplicado antes de iniciar: execute manualmente `db/exames.sql` no banco local com uma role administrativa. Para inserir um horário local de demonstração de Hemograma, execute também `db/dev_demo_exame.sql`; esse segundo script é opcional e não deve ser aplicado em produção. Nenhum script é executado pelo frontend.
+
+O backend atual usa `PACIENTE`, `PROFISSIONAL` e `ADMIN`; o front converte `ADMIN` para `ADMINISTRADOR` nas rotas. O cadastro correto de paciente cria também o registro necessário para agendamentos.
+
+No modo real, o agendamento usa o token do paciente autenticado. O backend precisa ter disponibilidade ativa para a data, unidade e especialidade selecionadas, além de vínculos válidos nas tabelas `profissional_clinica`, `profissional_especialidade` e `clinica_especialidade`. Profissionais podem cadastrar períodos futuros pela seção **Agenda**; cada período é dividido em horários de 30 minutos. Sem horários válidos, o front exibe estado vazio e não simula uma confirmação.
+
+Com `VITE_USE_MOCK=true`, os fluxos de consulta e exame usam dados e horários de demonstração e exibem um código `DEMO`; essas confirmações não são enviadas nem salvas no backend.
 
 ---
 
 ## 13. Build e deploy
+
+Em produção, defina `VITE_USE_MOCK=false` e `VITE_API_URL` como a URL pública da API antes do build. O `vercel.json` encaminha rotas do React Router para o `index.html`, permitindo recarregar links como `/inicio` e `/perfil`.
 
 ```bash
 npm run build     # gera dist/
@@ -307,7 +337,7 @@ npm run preview   # serve dist/ localmente
 
 Ambiente de deploy: **Vercel**. A aplicação deve estar publicada e acessível para demonstração da 1ª entrega (14/10/2026).
 
-Como o app usa `BrowserRouter`, verifique se abrir uma rota diretamente (por exemplo `/inicio`) funciona no deploy. O projeto ainda não tem `vercel.json`; se necessário, adicione um com rewrite das rotas para `/index.html`.
+Como o app usa `BrowserRouter`, o `vercel.json` encaminha rotas da aplicação (por exemplo `/inicio`) para `/index.html`.
 
 ---
 
@@ -317,23 +347,23 @@ Itens conferidos no código da `main` (commit `9a6c389`):
 
 | # | Problema | Onde | Correção |
 |---|---|---|---|
-| 1 | **Login do administrador não redireciona:** `AREA_POR_PERFIL` tem a chave `ADMIN`, mas o perfil é `ADMINISTRADOR` em `App.jsx` (`RotaProtegida`) e em `mocks/usuarios.js`; `AREA_POR_PERFIL['ADMINISTRADOR']` é `undefined` | `routes/areas.js`, `App.jsx`, `services/mocks/usuarios.js` | Padronizar o nome. Se o backend devolve `ADMIN`, trocar para `ADMIN` no `App.jsx` e no mock; se devolve `ADMINISTRADOR`, voltar `areas.js` para `ADMINISTRADOR` |
+| 1 | A tela de gestão ainda não administra os vínculos entre profissionais, clínicas e especialidades | Gestão / banco de dados | Configure os vínculos reais antes de cadastrar horários; clínicas e áreas novas não são associadas automaticamente |
 | 2 | `aria-labelledby="splashTitle"` não bate com o `id` do título (`splashTitulo`) | `components/SplashScreen.jsx` | Usar o mesmo id nos dois |
 | 3 | `JSON.parse` sem `try/catch`: localStorage corrompido quebra o app ao abrir | `context/AuthProvider.jsx` | Envolver em `try/catch` e limpar o storage se falhar |
 | 4 | `@fontsource/open-sans/700.css` importado duas vezes | `main.jsx` | Remover a repetição |
-| 5 | Fluxo de agendamento não ligado: `aoSelecionar` e `aoNavegar` são `console.log` e `aoVoltar` usa `window.history.back()` | `App.jsx` | Ligar as etapas (especialidade, unidade, profissional) |
+| 5 | Tabelas de exame precisam estar migradas antes da inicialização da API (`ddl-auto=validate`) | Backend, `db/exames.sql` | Aplicar a migração no banco de desenvolvimento |
 | 6 | CSS sem uso (`.escolher-especialidade*`) | `index.css` | Apagar |
 | 7 | Fonte em `px` em alguns CSS de formulário, o que ignora o tamanho de fonte do aparelho | `Campo.css`, `Login.css`, `Cadastro.css` | Trocar por `rem` |
 | 8 | Validação de e-mail duplicada (regex própria no Login, `emailValido` no Cadastro) | `auth/` | Usar `emailValido` nos dois |
 | 9 | Sem "esqueci minha senha" e sem confirmação de senha no cadastro | `auth/` | Implementar |
 | 10 | Token no `localStorage` é vulnerável a XSS; não há verificação de token expirado | `context/AuthProvider.jsx` | Com a API real, preferir cookie `httpOnly` e tratar expiração |
-| 11 | A tela de profissional mostra sempre os mesmos 2 profissionais mock, sem filtrar pelo que foi escolhido antes | `paciente/EscolherProfissional.jsx` | Filtrar pelas escolhas |
-| 12 | Não há `vercel.json`: abrir uma rota direto (por exemplo `/inicio`) pode retornar 404 no deploy antes do service worker assumir | raiz do projeto | Verificar no deploy e, se necessário, adicionar rewrite das rotas para `/index.html` |
+| 11 | A disponibilidade depende dos vínculos entre profissional, clínica e especialidade | API de disponibilidade / banco de dados | A API valida os vínculos e oferece apenas horários associados corretamente |
 
 ### Já resolvido
 
 - **Build quebrava no Linux** por causa do import `../components/Icones` (o arquivo é `icones.jsx`). Corrigido em 26/10 (commit `a8c214f`).
 - **PWA ausente** (sem manifest, service worker e ícones) e `index.html` com `lang="en"`. Resolvido pelo SCRUM-23 (24/10).
+- **Rotas diretas na Vercel** podem retornar 404 sem fallback de SPA. Resolvido com `vercel.json`.
 
 ---
 
@@ -344,7 +374,7 @@ Itens conferidos no código da `main` (commit `9a6c389`):
 | 07/10 | SCRUM-20: telas de escolha (especialidade, exame, unidade, profissional) e componentes `TelaEscolha` e `CartaoProfissional` |
 | 16/10 | SCRUM-21: tela inicial do paciente com layout responsivo |
 | 24/10 | SCRUM-23: PWA com manifest, service worker e ícones |
-| 24/10 | Ajuste da chave de perfil admin em `areas.js` (deixou o login do admin com bug, ver problema 1) |
+| 24/10 | Ajuste da chave de perfil do administrador em `areas.js` |
 | 26/10 | Correção do import de ícones; build passa |
 
 ---
@@ -352,9 +382,11 @@ Itens conferidos no código da `main` (commit `9a6c389`):
 ## 16. Roadmap
 
 - [ ] Corrigir o login do administrador (item 1 de [Problemas conhecidos](#14-problemas-conhecidos)).
-- [ ] Ligar o fluxo de agendamento (especialidade, unidade, profissional, confirmação).
-- [ ] Telas **Consultas** (meus agendamentos) e **Perfil** da barra de navegação.
-- [ ] Disponibilidade e confirmação de agendamento.
+- [x] Ligar o fluxo de consulta à API (especialidade, unidade, horário e confirmação).
+- [x] Tela **Consultas** (meus agendamentos) com busca e cancelamento.
+- [x] Tela **Perfil** da barra de navegação, ligada aos endpoints autenticados do paciente.
+- [x] Fluxo de exames ligado a endpoints e tabelas próprios no backend.
+- [ ] Cadastro e gestão de disponibilidade para profissionais.
 - [ ] Área do profissional (minha disponibilidade) e painel do administrador (clínicas, profissionais, especialidades e usuários).
 - [ ] Integração com a API real, substituindo os mocks.
 - [ ] Cache offline de dados e notificações push.

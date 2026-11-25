@@ -1,7 +1,7 @@
 import { usuariosMock } from './mocks/usuarios'
+import { requisitarApi } from './apiService'
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
-const API_URL = import.meta.env.VITE_API_URL
 
 const esperar = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -24,13 +24,42 @@ export async function login(email, senha) {
     }
   }
 
-  const resposta = await fetch(`${API_URL}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, senha }),
+  const dados = await requisitarApi('/auth/login', {
+    metodo: 'POST',
+    dados: { email, senha },
   })
-  if (!resposta.ok) throw new Error('E-mail ou senha incorretos')
-  return resposta.json()
+  if (!dados || typeof dados !== 'object' || Array.isArray(dados)) {
+    throw new Error(
+      'A resposta de login da API está inválida.'
+    )
+  }
+  const usuarioApi = dados.usuario ?? {}
+  if (
+    typeof usuarioApi !== 'object' ||
+    Array.isArray(usuarioApi)
+  ) {
+    throw new Error('Os dados do usuário retornados pela API estão inválidos.')
+  }
+  const tipoUsuario =
+    typeof dados.tipoUsuario === 'string'
+      ? dados.tipoUsuario
+      : usuarioApi.tipoUsuario
+  if (typeof dados.token !== 'string' || typeof tipoUsuario !== 'string') {
+    throw new Error(
+      'A resposta de login da API deve conter token e tipoUsuario.'
+    )
+  }
+  const perfil =
+    tipoUsuario === 'ADMIN' ? 'ADMINISTRADOR' : tipoUsuario
+  return {
+    token: dados.token,
+    usuario: {
+      ...usuarioApi,
+      nome: usuarioApi.nome || email.split('@')[0],
+      email: usuarioApi.email || email,
+      tipoUsuario: perfil,
+    },
+  }
 }
 
 export async function cadastrar(dados) {
@@ -44,11 +73,15 @@ export async function cadastrar(dados) {
     return { id: novo.id }
   }
 
-  const resposta = await fetch(`${API_URL}/auth/cadastro`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dados),
+  return requisitarApi('/auth/cadastro', {
+    metodo: 'POST',
+    dados: {
+      nome: dados.nome,
+      email: dados.email,
+      senha: dados.senha,
+      telefone: dados.telefone,
+      cpf: dados.cpf,
+      dataNascimento: dados.dataNascimento,
+    },
   })
-  if (!resposta.ok) throw new Error('Não foi possível criar a conta')
-  return resposta.json()
 }

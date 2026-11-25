@@ -1,22 +1,53 @@
+import { useEffect, useState } from 'react'
 import TelaEscolha from '../components/TelaEscolha'
+import { listarClinicas } from '../services/agendamentoService'
 
-const UNIDADES_MOCK = [
-  { id: 1, nome: 'Hospital Esperança' },
-  { id: 2, nome: 'Hospital dos Veios' },
-  { id: 3, nome: 'Upa Nossa Senhora Terezinha' },
-  { id: 4, nome: 'Upa de NEW Discovery' },
-  { id: 5, nome: 'Clínica Joana Bezerra' },
-]
+function EscolherUnidade({
+  especialidade,
+  exame,
+  aoVoltar,
+  aoSelecionar,
+  aoNavegar,
+}) {
+  const itemSelecionado = exame || especialidade
+  const [opcoes, setOpcoes] = useState([])
+  const [carregando, setCarregando] = useState(true)
+  const [erro, setErro] = useState('')
+  const [tentativa, setTentativa] = useState(0)
 
-function EscolherUnidade({ aoVoltar, aoSelecionar, aoNavegar }) {
+  useEffect(() => {
+    let ativa = true
+
+    async function carregar() {
+      setCarregando(true)
+      setErro('')
+      try {
+        const clinicas = await listarClinicas()
+        if (ativa) setOpcoes(clinicas.filter((item) => item.ativo))
+      } catch (error) {
+        if (ativa) setErro(error.message)
+      } finally {
+        if (ativa) setCarregando(false)
+      }
+    }
+
+    carregar()
+    return () => {
+      ativa = false
+    }
+  }, [tentativa])
+
   return (
     <TelaEscolha
       titulo="UNIDADE"
-      subtitulo="Escolher Unidade de atendimento"
+      subtitulo={`Escolher unidade para ${itemSelecionado.nome}`}
       etapaAtual={2}
-      opcoes={UNIDADES_MOCK}
+      opcoes={opcoes}
       rotuloBusca="Pesquisar unidade"
       mensagemVazia="Nenhuma unidade encontrada."
+      carregando={carregando}
+      erro={erro}
+      aoTentarNovamente={() => setTentativa((valor) => valor + 1)}
       aoVoltar={aoVoltar}
       aoSelecionar={aoSelecionar}
       aoNavegar={aoNavegar}
