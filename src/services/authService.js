@@ -55,8 +55,8 @@ export async function login(email, senha) {
     token: dados.token,
     usuario: {
       ...usuarioApi,
-      nome: usuarioApi.nome || email.split('@')[0],
-      email: usuarioApi.email || email,
+      nome: usuarioApi.nome || dados.nome || email.split('@')[0],
+      email: usuarioApi.email || dados.email || email,
       tipoUsuario: perfil,
     },
   }

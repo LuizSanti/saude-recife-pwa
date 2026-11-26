@@ -5,6 +5,12 @@ const ITENS_POR_PERFIL = {
   admin: [
     { id: 'inicio', rotulo: 'Início', rota: '/admin', icone: 'inicio' },
     {
+      id: 'indicadores',
+      rotulo: 'Análise',
+      rota: '/admin/indicadores',
+      icone: 'indicadores',
+    },
+    {
       id: 'clinicas',
       rotulo: 'Clínicas',
       rota: '/admin/clinicas',
@@ -89,6 +95,11 @@ function IconeNavegacao({ nome }) {
       <>
         <rect x="3" y="5" width="18" height="16" rx="2" />
         <path d="M16 3v4M8 3v4M3 10h18M8 14h2m4 0h2m-8 3h2" />
+      </>
+    ),
+    indicadores: (
+      <>
+        <path d="M4 20V10m5 10V4m5 16v-7m5 7V7M2 20h20" />
       </>
     ),
     historico: (

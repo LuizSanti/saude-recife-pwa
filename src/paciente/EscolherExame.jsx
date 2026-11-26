@@ -38,6 +38,7 @@ function EscolherExame({ aoVoltar, aoSelecionar, aoNavegar }) {
       opcoes={exames}
       rotuloBusca="Pesquisar exame"
       mensagemVazia="Nenhum exame encontrado."
+      mensagemSemOpcoes="Não há exames ativos cadastrados no momento. Entre em contato com o suporte."
       carregando={carregando}
       erro={erro}
       aoTentarNovamente={() => setTentativa((valor) => valor + 1)}
