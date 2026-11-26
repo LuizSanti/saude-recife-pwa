@@ -1,0 +1,25 @@
+id,data,especialidade,clinica,status
+1,2026-10-02,Cardiologia,Clínica Boa Saúde,CONFIRMADO
+2,2026-10-03,Clínica Geral,Centro Médico Recife,REALIZADO
+3,2026-10-05,Geriatria,Unidade Boa Viagem,CANCELADO
+4,2026-10-07,Ortopedia,Clínica Boa Saúde,CONFIRMADO
+5,2026-10-09,Cardiologia,Centro Médico Recife,REALIZADO
+6,2026-10-11,Clínica Geral,Unidade Boa Viagem,CONFIRMADO
+7,2026-10-13,Geriatria,Clínica Boa Saúde,REALIZADO
+8,2026-10-15,Ortopedia,Centro Médico Recife,CANCELADO
+9,2026-10-17,Cardiologia,Unidade Boa Viagem,CANCELADO
+10,2026-10-19,Clínica Geral,Clínica Boa Saúde,REALIZADO
+11,2026-10-21,Ortopedia,Unidade Boa Viagem,REALIZADO
+12,2026-10-23,Cardiologia,Clínica Boa Saúde,CONFIRMADO
+13,2026-10-25,Geriatria,Centro Médico Recife,CONFIRMADO
+14,2026-10-27,Clínica Geral,Centro Médico Recife,CANCELADO
+15,2026-10-29,Ortopedia,Clínica Boa Saúde,CONFIRMADO
+16,2026-11-01,Cardiologia,Centro Médico Recife,REALIZADO
+17,2026-11-03,Geriatria,Unidade Boa Viagem,CANCELADO
+18,2026-11-05,Clínica Geral,Unidade Boa Viagem,CONFIRMADO
+19,2026-11-08,Cardiologia,Unidade Boa Viagem,CONFIRMADO
+20,2026-11-11,Ortopedia,Centro Médico Recife,CANCELADO
+21,2026-11-14,Clínica Geral,Clínica Boa Saúde,REALIZADO
+22,2026-11-17,Cardiologia,Clínica Boa Saúde,CONFIRMADO
+23,2026-11-21,Geriatria,Centro Médico Recife,REALIZADO
+24,2026-11-26,Cardiologia,Unidade Boa Viagem,CONFIRMADO

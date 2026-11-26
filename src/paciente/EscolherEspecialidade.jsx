@@ -40,6 +40,7 @@ function EscolherEspecialidade({ aoVoltar, aoSelecionar, aoNavegar }) {
       opcoes={opcoes}
       rotuloBusca="Pesquisar especialidade"
       mensagemVazia="Nenhuma especialidade encontrada."
+      mensagemSemOpcoes="Não há especialidades ativas cadastradas no momento. Entre em contato com o suporte."
       carregando={carregando}
       erro={erro}
       aoTentarNovamente={() => setTentativa((valor) => valor + 1)}
