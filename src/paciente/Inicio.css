@@ -56,6 +56,13 @@
   overflow-wrap: anywhere;
 }
 
+.inicio-perfil-aviso {
+  margin-top: -12px;
+  color: var(--cinza-texto);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
 .inicio-sino {
   position: relative;
   width: 52px;

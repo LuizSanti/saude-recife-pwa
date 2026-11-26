@@ -318,6 +318,8 @@ O endpoint de horários omite disponibilidades que conflitam com consultas confi
 
 O backend precisa ter o schema de exames aplicado antes de iniciar: execute manualmente `db/exames.sql` no banco local com uma role administrativa. Para inserir um horário local de demonstração de Hemograma, execute também `db/dev_demo_exame.sql`; esse segundo script é opcional e não deve ser aplicado em produção. Nenhum script é executado pelo frontend.
 
+Em produção, o banco também precisa conter especialidades e exames ativos para que apareçam nas telas do paciente. O frontend não substitui catálogos vazios por dados mockados, pois esses registros precisam corresponder aos IDs usados pelo backend nos agendamentos.
+
 O backend atual usa `PACIENTE`, `PROFISSIONAL` e `ADMIN`; o front converte `ADMIN` para `ADMINISTRADOR` nas rotas. O cadastro correto de paciente cria também o registro necessário para agendamentos.
 
 No modo real, o agendamento usa o token do paciente autenticado. O backend precisa ter disponibilidade ativa para a data, unidade e especialidade selecionadas, além de vínculos válidos nas tabelas `profissional_clinica`, `profissional_especialidade` e `clinica_especialidade`. Profissionais podem cadastrar períodos futuros pela seção **Agenda**; cada período é dividido em horários de 30 minutos. Sem horários válidos, o front exibe estado vazio e não simula uma confirmação.

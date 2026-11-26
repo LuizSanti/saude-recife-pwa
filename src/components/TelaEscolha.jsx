@@ -12,6 +12,7 @@ function TelaEscolha({
   opcoes,
   rotuloBusca,
   mensagemVazia,
+  mensagemSemOpcoes,
   carregando = false,
   erro = '',
   aoTentarNovamente,
@@ -69,6 +70,10 @@ function TelaEscolha({
             </button>
           )}
         </div>
+      ) : opcoes.length === 0 && mensagemSemOpcoes ? (
+        <p className="tela-escolha-estado" role="status">
+          {mensagemSemOpcoes}
+        </p>
       ) : children ?? (
         <ListaOpcoes
           opcoes={opcoes}

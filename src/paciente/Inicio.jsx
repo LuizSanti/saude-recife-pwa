@@ -11,7 +11,10 @@ import {
 import { useAuth } from '../hooks/useAuth'
 import lupaIcone from '../assets/lupaIcone.svg'
 import { listarConsultasComDetalhes } from '../services/agendamentoService'
+import { buscarPerfilPaciente } from '../services/gestaoService'
 import './Inicio.css'
+
+const USAR_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
 
 function doisPrimeirosNomes(nome = '') {
   return nome.trim().split(/\s+/).slice(0, 2).join(' ')
@@ -52,12 +55,31 @@ function enderecoClinica(clinica) {
 function Inicio({ aoNavegar }) {
   const { usuario } = useAuth()
   const navigate = useNavigate()
+  const [nomePerfil, setNomePerfil] = useState('')
+  const [erroPerfil, setErroPerfil] = useState('')
   const [consulta, setConsulta] = useState(null)
   const [carregandoConsulta, setCarregandoConsulta] = useState(true)
   const [erroConsulta, setErroConsulta] = useState('')
 
   useEffect(() => {
     let ativa = true
+
+    if (!USAR_MOCK) {
+      buscarPerfilPaciente()
+        .then((perfil) => {
+          if (typeof perfil?.nome !== 'string' || !perfil.nome.trim()) {
+            throw new Error('O perfil não retornou o nome completo.')
+          }
+          if (ativa) setNomePerfil(perfil.nome.trim())
+        })
+        .catch(() => {
+          if (ativa) {
+            setErroPerfil(
+              'Não foi possível carregar seu nome completo. Confira seus dados no perfil.'
+            )
+          }
+        })
+    }
 
     listarConsultasComDetalhes()
       .then((consultas) => {
@@ -84,21 +106,36 @@ function Inicio({ aoNavegar }) {
     }
   }, [])
 
+  const nomeUsuario = usuario?.nome?.trim()
+  const nomeEmail = usuario?.email?.split('@')[0]
+  const nomeExibicao =
+    nomePerfil ||
+    (USAR_MOCK || nomeUsuario !== nomeEmail ? nomeUsuario : '') ||
+    'Paciente'
+
   return (
     <main className="inicio">
       <header className="inicio-topo">
         <div className="inicio-avatar" aria-hidden="true">
-          {iniciais(usuario?.nome)}
+          {iniciais(nomeExibicao)}
         </div>
         <div className="inicio-saudacao">
           <p className="inicio-bemvindo">Bem vindo</p>
-          <h1 className="inicio-nome">{doisPrimeirosNomes(usuario?.nome)}</h1>
+          <h1 className="inicio-nome">
+            {doisPrimeirosNomes(nomeExibicao)}
+          </h1>
         </div>
         <button type="button" className="inicio-sino" aria-label="Notificações">
           <IconeSino />
           <span className="inicio-sino-ponto" aria-hidden="true" />
         </button>
       </header>
+
+      {erroPerfil && (
+        <p className="inicio-perfil-aviso" role="status">
+          {erroPerfil}
+        </p>
+      )}
 
       <button
         type="button"
