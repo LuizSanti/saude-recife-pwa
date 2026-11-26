@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import BarraNavegacaoGestao from '../components/BarraNavegacaoGestao'
 import { useAuth } from '../hooks/useAuth'
+import PainelIndicadores from './PainelIndicadores'
 import {
   atualizarPerfilProfissional,
   atualizarStatusAgendamento,
@@ -363,6 +364,8 @@ function PainelGestao({ perfil }) {
           resultado = { agendamentos, disponibilidades, clinicas, areas }
         } else if (profissional) {
           resultado = await listarAgendaProfissional()
+        } else if (secao === 'indicadores') {
+          resultado = {}
         } else if (secao === 'clinicas') {
           resultado = await listarClinicasAdmin()
         } else if (secao === 'equipe') {
@@ -401,6 +404,7 @@ function PainelGestao({ perfil }) {
   const titulo = useMemo(() => {
     const titulos = {
       inicio: 'Início',
+      indicadores: 'Indicadores',
       clinicas: 'Clínicas',
       equipe: 'Equipe',
       areas: 'Áreas de saúde',
@@ -454,6 +458,10 @@ function PainelGestao({ perfil }) {
   }
 
   function conteudo() {
+    if (!profissional && secao === 'indicadores') {
+      return <PainelIndicadores />
+    }
+
     if (carregando) return <Carregando />
     if (erro && !dados) return <ErroCarregamento mensagem={erro} tentarNovamente={() => setTentativa((v) => v + 1)} />
 

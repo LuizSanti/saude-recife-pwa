@@ -44,7 +44,7 @@ Repositório irmão: `saude-palma-backend` (API REST).
 | Fluxo de exames | Catálogo, horários e confirmação ligados à API; requer as tabelas de exame |
 | Consultas | Lista consultas do paciente, busca e cancelamento |
 | Perfil do paciente | Leitura e edição de nome e telefone pela API |
-| Área do profissional e do administrador | Painéis com agenda, pacientes, histórico, perfil e saída da conta; gestão de clínicas, equipe e áreas |
+| Área do profissional e do administrador | Painéis com agenda, pacientes, histórico, perfil e saída da conta; gestão de clínicas, equipe e áreas; indicadores administrativos |
 | PWA (manifest, service worker, ícones) | Configurado com `vite-plugin-pwa`; build gera manifest, `sw.js` e cache de arquivos estáticos |
 | Build de produção | Passando (import de ícones corrigido em 26/10) |
 | Login do administrador | Redirecionamento por perfil configurado |
@@ -184,7 +184,7 @@ O app tem três perfis: `PACIENTE`, `PROFISSIONAL` e `ADMINISTRADOR`. Qualquer r
 | `/horario-exame` | Escolher data/horário e confirmar exame | `PACIENTE` |
 | `/consultas` | Consultas agendadas e cancelamento | `PACIENTE` |
 | `/profissional/*` | Pacientes, agenda, histórico e perfil profissional | `PROFISSIONAL` |
-| `/admin/*` | Início, clínicas, equipe, áreas e perfil administrativo | `ADMINISTRADOR` |
+| `/admin/*` | Início, indicadores, clínicas, equipe, áreas e perfil administrativo | `ADMINISTRADOR` |
 
 A splash aparece por 3 segundos ao abrir o app (timer fixo em `App.jsx`).
 
@@ -319,6 +319,12 @@ O endpoint de horários omite disponibilidades que conflitam com consultas confi
 O backend precisa ter o schema de exames aplicado antes de iniciar: execute manualmente `db/exames.sql` no banco local com uma role administrativa. Para inserir um horário local de demonstração de Hemograma, execute também `db/dev_demo_exame.sql`; esse segundo script é opcional e não deve ser aplicado em produção. Nenhum script é executado pelo frontend.
 
 Em produção, o banco também precisa conter especialidades e exames ativos para que apareçam nas telas do paciente. O frontend não substitui catálogos vazios por dados mockados, pois esses registros precisam corresponder aos IDs usados pelo backend nos agendamentos.
+
+### Indicadores administrativos
+
+A rota `/admin/indicadores` apresenta o total de agendamentos, a distribuição por especialidade e a taxa de cancelamento, com filtros de período e especialidade. A taxa é calculada como cancelados divididos pelo total do recorte. O modo **Dados da aplicação** consulta `/agendamentos/admin`; **Base sintética para demonstração** usa `src/data/agendamentos-dashboard-demo.csv`, que também pode ser baixado pela tela. Essa base contém registros fictícios de 02/10/2026 a 26/11/2026 e não representa pacientes ou operação real.
+
+Validação da base sintética: 24 registros com IDs únicos e campos preenchidos; 10 confirmados, 8 realizados e 6 cancelados. No período completo, a taxa é `6 ÷ 24 = 25%`. Filtrando Cardiologia, são 8 registros, 1 cancelamento e taxa de `1 ÷ 8 = 12,5%`. Durante a conferência, um teste encontrou uma divergência na quantidade de cancelamentos da base; o registro foi corrigido e os totais foram recalculados.
 
 O backend atual usa `PACIENTE`, `PROFISSIONAL` e `ADMIN`; o front converte `ADMIN` para `ADMINISTRADOR` nas rotas. O cadastro correto de paciente cria também o registro necessário para agendamentos.
 
